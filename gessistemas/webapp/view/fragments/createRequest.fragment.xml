@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog title="Petición de Cambio" type='Message' contentWidth="600px" class="sapUiNoContentPadding">
+        <content>
+            <l:Grid vSpacing="1" hSpacing="1" width="100%" class="sapUiSmallMargin">
+                <VBox>
+                    <Title text="Ingresar datos del campo a cambiar"/>
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12"/>
+                    </layoutData>
+                </VBox>
+                <VBox>
+                    <Label text="Campo" />
+                    <Input id="ipCampoRequest" width="100%" liveChange="liveChange"/>
+                    <Label text="Descripción" />
+                    <TextArea id="ipDescripcionCrearRequest" rows="4" width="100%" liveChange="liveChange"/>
+                    <Label text="ID Alerta" />
+                    <Select id="slIdAlertaRequest" forceSelection="true" width="100%">
+                        <core:Item key="" text=""/>
+                        <core:Item key="tipo 1" text="Tipo 1"/>
+                        <core:Item key="tipo 2" text="Tipo 2"/>
+                        <core:Item key="tipo 3" text="Tipo 3"/>
+                        <core:Item key="tipo 4" text="Tipo 4"/>
+                    </Select>
+                    <Label text="Plazo de Conservación" width="100%"/>
+				    <DatePicker
+                        id="dtPlazoConservacionRequest"
+                        placeholder="Seleccione el plazo"
+                        change="handleChange"
+                        class="sapUiSmallMarginBottom"
+                    />
+
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12"/>
+                    </layoutData>
+                </VBox>
+            </l:Grid>
+        </content>
+        <beginButton>
+            <Button text="Guardar" type="Emphasized" press="onSaveCreateRequest"/>
+        </beginButton>
+        <endButton>
+            <Button text="Cancelar" press="onCloseCreateRequest"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

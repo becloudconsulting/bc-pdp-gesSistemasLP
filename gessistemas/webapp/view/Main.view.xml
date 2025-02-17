@@ -1,0 +1,94 @@
+<mvc:View 
+    controllerName="com.becloud.pdp.gessistemas.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <fb:FilterBar class="sapUiSizeCompact" reset="onResetFilters" showRestoreOnFB="true" showGoOnFB="false" showFilterConfiguration="false" useToolbar="false">
+                <fb:filterItems>
+                    <fb:FilterItem name="A" label="Sistema">
+                        <fb:control>
+                            <Input id="ipSistemaSearch" width="100%" liveChange="changeFilter"/>
+                        </fb:control>
+                    </fb:FilterItem>
+                    <fb:FilterItem name="B" label="Estado">
+                        <fb:control>
+                            <Select id="slEstadoSearch" selectedKey="0" change="changeFilter">
+                                <core:Item key="0" text="Todos"/>
+                                <core:Item key="1" text="Activo"/>
+                                <core:Item key="2" text="Inactivo"/>
+                            </Select>
+                        </fb:control>
+                    </fb:FilterItem>
+                    <fb:FilterItem name="C" label="Rango de Fechas">
+                        <fb:control>
+                            <DateRangeSelection
+                                id="slFechaSearch"
+                                displayFormat="yyyy/MM/dd"
+                                change="onDateRangeChange"
+                            />
+
+                        </fb:control>
+                    </fb:FilterItem>
+                </fb:filterItems>
+            </fb:FilterBar>
+
+            <VBox class="sapUiSmallMargin">
+                <Table id="idProductsTable" sticky="ColumnHeaders,HeaderToolbar" items="{path: 'oModelCompanySystem>/', sorter: [{path: 'id', descending: false}]}" mode="None" updateFinished="updateFinished" growing="true" growingThreshold="10">
+                    <headerToolbar>
+                        <Toolbar>
+                            <content>
+                                <Title id="tProducts" text="Registros (0)"/>
+                                <Button icon="sap-icon://excel-attachment" press="onExcel" tooltip="Descargar registros"/>
+                                <ToolbarSpacer/>
+                                <Button class="sapUiSizeCompact" tooltip="Ingresar Sistema" iconFirst="false" text="Ingresar Sistema" icon="sap-icon://create-form" type="Emphasized" press="onCreate"/>
+                                <Button class="sapUiSizeCompact" tooltip="Actualizar datos" iconFirst="false" text="Actualizar datos" icon="sap-icon://synchronize" type="Emphasized" press="onRefresh"/>
+                            </content>
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="ID"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Sistema"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Metodo"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="EndPoint"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Fecha Creación"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Estado"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" vAlign="Middle">
+                            <Text text="Acciones"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Detail" detailPress="onEdit" vAlign="Middle">
+                            <cells>
+                                <ObjectIdentifier text="{oModelCompanySystem>id}"/>
+                                <ObjectIdentifier text="{oModelCompanySystem>companySystemName}"/>
+                                <ObjectIdentifier text="{oModelCompanySystem>method}"/>
+                                <ObjectIdentifier text="{oModelCompanySystem>endPoint}"/>
+                                <ObjectIdentifier text="{path: 'oModelCompanySystem>creationDate', formatter:'.formatDate'}"/>
+                                <ObjectStatus text="{path: 'oModelCompanySystem>status', formatter: '.formatterEstado'}" state="{path: 'oModelCompanySystem>status', formatter: '.formatterState'}" inverted="true"/>
+                                <HBox justifyContent="SpaceAround">
+                                    <Button icon="sap-icon://connected" press="onShowInformation" tooltip="Ver Detalles" type="Transparent"/>
+                                    <Button icon="sap-icon://activity-2" press="onListUserData" tooltip="Peticion" type="Transparent"/>
+                                </HBox>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

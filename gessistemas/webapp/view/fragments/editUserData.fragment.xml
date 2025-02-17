@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog id="dlgEditUserData" title="Editar Usuario" type='Message' contentWidth="600px" class="sapUiNoContentPadding">
+        <content>
+            <l:Grid vSpacing="1" hSpacing="1" width="100%" class="sapUiSmallMargin">
+                <VBox>
+                    <Title text="Editar Información del Usuario"/>
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12"/>
+                    </layoutData>
+                </VBox>
+                <VBox>
+                    <Label text="Nombres" />
+                    <Input id="ipFirstNameEdit" width="100%" value="{oModelUsersData>firstName}" />
+                    
+                    <Label text="Apellidos" />
+                    <Input id="ipLastNameEdit" width="100%" value="{oModelUsersData>lastName}" />
+                    
+                    <Label text="Correo" />
+                    <Input id="ipEmailEdit" width="100%" value="{oModelUsersData>email}" />
+                    
+                    <Label text="RUT" />
+                    <Input id="ipRutEdit" width="100%" value="{oModelUsersData>rut}" />
+                    
+                    <Label text="Estado" />
+                    <Select id="slStatusEdit" forceSelection="true" width="100%" selectedKey="{oModelUsersData>status}">
+                        <core:Item key="Activo" text="Activo"/>
+                        <core:Item key="Inactivo" text="Inactivo"/>
+                    </Select>
+                    
+                    <Label text="Fecha de Creación" />
+                    <Input enabled="false" id="ipCreationDateEdit" width="100%" value="{oModelUsersData>creationDate}" />
+                    
+                    <Label text="Teléfono" />
+                    <Input id="ipPhoneEdit" width="100%" value="{oModelUsersData>phone}" />
+
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12"/>
+                    </layoutData>
+                </VBox>
+            </l:Grid>
+        </content>
+        <beginButton>
+            <Button text="Guardar Cambios" press=".onSaveEdit"/>
+        </beginButton>
+        <endButton>
+            <Button text="Cancelar" press=".onCloseEdit"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

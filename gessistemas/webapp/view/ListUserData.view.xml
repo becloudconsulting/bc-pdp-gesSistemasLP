@@ -1,0 +1,165 @@
+<mvc:View
+    controllerName="com.becloud.pdp.gessistemas.controller.ListUserData"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar">
+    <Page title="Datos de Usuario">
+        <content>
+            <fb:FilterBar class="sapUiSizeCompact" reset="onResetFilters" showRestoreOnFB="true" showGoOnFB="false" showFilterConfiguration="false" useToolbar="false">
+                <fb:filterItems>
+                    <fb:FilterItem name="A" label="Nombre ">
+                        <fb:control>
+                            <Input id="NameSearch" width="100%" liveChange="changeFilter"/>
+                        </fb:control>
+                    </fb:FilterItem>
+                    <fb:FilterItem name="B" label="Estado">
+                        <fb:control>
+                            <Select id="slEstadoSearch" selectedKey="0" change="changeFilter">
+                                <core:Item key="0" text="Todos"/>
+                                <core:Item key="1" text="Activo"/>
+                                <core:Item key="2" text="Inactivo"/>
+                            </Select>
+                        </fb:control>
+                    </fb:FilterItem>
+                    <fb:FilterItem name="C" label="Rango de Fechas">
+                        <fb:control>
+                            <DateRangeSelection
+                                id="slFechaSearch"
+                                displayFormat="yyyy/MM/dd"
+                                change="onDateRangeChange"
+                            />
+
+                        </fb:control>
+                    </fb:FilterItem>
+                </fb:filterItems>
+            </fb:FilterBar>
+
+            <VBox class="sapUiSmallMargin">
+                <Table id="idListUsersTable" sticky="ColumnHeaders,HeaderToolbar" items="{path: 'oModelUsersData>/', sorter: [{path: 'id', descending: false}]}" mode="None" updateFinished="updateFinished" growing="true" growingThreshold="10" visible="{= ${/isSecondTableVisible} === false }">
+                    <headerToolbar>
+                        <Toolbar>
+                            <content>
+                                <Title id="idListUsersData" text="Registros (0)"/>
+                                <Button icon="sap-icon://switch-views" press=".onToggleTables" tooltip="Cambiar Tabla"/>
+                                <Button icon="sap-icon://excel-attachment" press="onExcel" tooltip="Descargar registros"/>
+                                <ToolbarSpacer/>
+                                <Button class="sapUiSizeCompact" tooltip="Actualizar datos" iconFirst="false" text="Actualizar datos" icon="sap-icon://synchronize" type="Emphasized" press="onRefresh"/>
+                            </content>
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Nombres"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Apellidos"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Correo"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="RUT"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Estado"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Fecha Creación"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Teléfono"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" vAlign="Middle">
+                            <Text text="Acciones"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Detail" detailPress="onEdit" vAlign="Middle">
+                            <cells>
+                                <ObjectIdentifier text="{oModelUsersData>firstName}"/>
+                                <ObjectIdentifier text="{oModelUsersData>lastName}"/>
+                                <ObjectIdentifier text="{oModelUsersData>email}"/>
+                                <ObjectIdentifier text="{oModelUsersData>rut}"/>
+                                <ObjectStatus text="{path: 'oModelUsersData>status', formatter: '.formatterEstado'}"
+                                            state="{path: 'oModelUsersData>status', formatter: '.formatterState'}"
+                                            inverted="true"/>
+                                <ObjectIdentifier text="{path: 'oModelUsersData>creationDate', formatter: '.formatDate'}"/>
+                                <ObjectIdentifier text="{oModelUsersData>phone}"/>
+                                <HBox justifyContent="SpaceAround">
+                                    <Button icon="sap-icon://connected" press="onShowInformation" tooltip="Ver Detalles" type="Transparent"/>
+                                    <Button icon="sap-icon://detail-view" press="onShowRequestUser" tooltip="Peticiones" type="Transparent"/>
+                                    <Button icon="sap-icon://display" press=".onOpenModal" tooltip="Ver Peticiones" type="Transparent"/>
+                                   <!--  <Button icon="sap-icon://activity-2" press="onCreateRequest" tooltip="Peticion" type="Transparent"/> -->
+                                </HBox>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+            
+            <VBox class="sapUiSmallMargin" visible="{= ${/isSecondTableVisible} === true }"> 
+                <Table id="idListUserTable" sticky="ColumnHeaders,HeaderToolbar" items="{path: 'oModelUserData>/', sorter: [{path: 'id', descending: false}]}" mode="None" updateFinished="updateFinishedUser" growing="true" growingThreshold="10">
+                    <headerToolbar>
+                        <Toolbar>
+                            <content>
+                                <Title id="idListUserData" text="Registros (0)"/>
+                                <Button icon="sap-icon://switch-views" press=".onToggleTables" tooltip="Cambiar Tabla"/>
+                                <Button icon="sap-icon://excel-attachment" press="onExcel" tooltip="Descargar registros"/>
+                                <ToolbarSpacer/>
+                                <Button class="sapUiSizeCompact" tooltip="Crear Petición" iconFirst="false" text="Crear Petición" icon="sap-icon://create-form" type="Emphasized" press="onCreateRequest"/>
+                                <Button class="sapUiSizeCompact" tooltip="Actualizar datos" iconFirst="false" text="Actualizar datos" icon="sap-icon://synchronize" type="Emphasized" press="onRefresh"/>
+                            </content>
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Nombres"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Apellidos"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Correo"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="RUT"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Estado"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Fecha Creación"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Teléfono"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" vAlign="Middle">
+                            <Text text="Acciones"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Detail" detailPress="onEdit" vAlign="Middle">
+                            <cells>
+                                <ObjectIdentifier text="{oModelUserData>firstName}"/>
+                                <ObjectIdentifier text="{oModelUserData>lastName}"/>
+                                <ObjectIdentifier text="{oModelUserData>email}"/>
+                                <ObjectIdentifier text="{oModelUserData>rut}"/>
+                                <ObjectStatus text="{path: 'oModelUserData>status', formatter: '.formatterEstado'}"
+                                            state="{path: 'oModelUserData>status', formatter: '.formatterState'}"
+                                            inverted="true"/>
+                                <ObjectIdentifier text="{path: 'oModelUserData>creationDate', formatter: '.formatDate'}"/>
+                                <ObjectIdentifier text="{oModelUserData>phone}"/>
+                                <HBox justifyContent="SpaceAround">
+                                    <Button icon="sap-icon://connected" press="onShowInformation" tooltip="Ver Detalles" type="Transparent"/>
+                                    <Button icon="sap-icon://activity-2" press="onCreateRequest" tooltip="Peticion" type="Transparent"/>
+                                    <Button icon="sap-icon://display" press="onShowRequests" tooltip="Ver Peticiones" type="Transparent"/>
+                                </HBox>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

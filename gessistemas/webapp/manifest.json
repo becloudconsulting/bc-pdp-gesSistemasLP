@@ -1,0 +1,111 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "com.becloud.pdp.gessistemas",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.16.3",
+      "toolsId": "ab2ca84b-85cd-4994-a251-e6070375bfb3"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.132.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.becloud.pdp.gessistemas.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+          "routerClass": "sap.m.routing.Router",
+          "controlAggregation": "pages",
+          "controlId": "app",
+          "transition": "slide",
+          "type": "View",
+          "viewType": "XML",
+          "path": "com.becloud.pdp.gessistemas.view",
+          "async": true,
+          "viewPath": "com.becloud.pdp.gessistemas.view"
+      },
+      "routes": [
+          {
+              "name": "RouteMain",
+              "pattern": ":?query:",
+              "target": [
+                  "TargetMain"
+              ]
+          },
+          {
+              "name": "RouteListUserData",
+              "pattern": "listUserData",
+              "target": "TargetListUserData"
+          }
+      ],
+      "targets": {
+          "TargetMain": {
+              "id": "Main",
+              "name": "Main"
+          },
+          "TargetListUserData": {
+              "viewId": "ListUserDataView",
+              "viewName": "ListUserData",  
+              "viewLevel": 2 
+          }
+      }
+  },
+    "rootView": {
+      "viewName": "com.becloud.pdp.gessistemas.view.App",
+      "type": "XML",
+      "id": "App"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "bc-pdp-gesSistemas-approuter"
+  }
+}
