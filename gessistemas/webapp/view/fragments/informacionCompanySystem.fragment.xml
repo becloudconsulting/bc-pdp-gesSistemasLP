@@ -11,11 +11,11 @@
                     </layoutData>
                 </VBox>
                 <VBox>
-                    <Label text="Sistema"/>
+                    <Label text="Motivo"/>
                     <Input enabled="false" width="100%" value="{oModelCompanySystem>companySystemName}"/>
-                    <Label text="Método" />
+                    <Label text="Sistema asociado a la denuncia" />
                     <Input enabled="false" width="100%" value="{oModelCompanySystem>method}"/>
-                    <Label text="EndPoint" />
+                    <Label text="API asociada a la denuncia" />
                     <Input enabled="false" width="100%" value="{oModelCompanySystem>endPoint}"/>
                     <Label text="Tipo Conexión" />
                     <Input enabled="false" width="100%" value="{oModelCompanySystem>connectionType}"/>

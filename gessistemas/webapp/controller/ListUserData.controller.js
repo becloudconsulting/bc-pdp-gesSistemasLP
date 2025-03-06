@@ -21,6 +21,13 @@ sap.ui.define([
                 isSecondTableVisible: false
             });
             this.getView().setModel(OmodelTableUser);
+            // LE AGREGUÉ EL GETCONEXION AQUÍ EN EL ONINIT
+            this.onBusyDialog("Open");
+            this.getConexion().then(function (responseConexion){
+                var oModelConexion = new JSONModel(responseConexion.rsp);
+                this.getView().setModel(oModelConexion, "oModelConexionFF");
+                this.onBusyDialog("Close");
+            }.bind(this))
 
             this.getCompanySystemRequest().then(function (responseCompanySystemRequest){
                 this.onBusyDialog("Open");
@@ -35,12 +42,18 @@ sap.ui.define([
                 this.getView().setModel(oModelUsersData, "oModelUsersData");
                 this.onBusyDialog("Close");
             }.bind(this))
-            this.getUserData().then(function (responseUserData){
+
+            /*this.getUserData().then(function (responseUserData){
                 this.onBusyDialog("Open");
                 var oModelUserData = new JSONModel(responseUserData.rsp);
                 this.getView().setModel(oModelUserData, "oModelUserData");
                 this.onBusyDialog("Close");
-            }.bind(this))
+            }.bind(this))*/
+
+            //LE AGREGE LOS SIGUIENTES BLOQUES PARA EL FRAGMENT DE INGRESAR NUEVA CONEXION
+
+
+            //HASTA AQUI
         },
 
         /* onResetFilters: function () {
@@ -177,13 +190,13 @@ sap.ui.define([
                         rsp: [
                             {
                                 id: "1",
-                                firstName: "Juan",
-                                lastName: "Pérez",
-                                email: "juan.perez@example.com",
-                                rut: "12345678-9",
+                                API_name: "Becloud",
+                                Tipo_conexion: "REST",
+                                Metodo: "GET",
+                                Path: "abcd/aa/bd",
+                                Host: "host.cl",
                                 status: "Activo",
                                 creationDate: "2023-01-01",
-                                phone: "+56 9 1234 5678",
                                 RequestData: [
                                     { id: "1", campo: "Nombre", descripcion: "Mi nombre correcto es Juanito", fechaLimite: "2025-01-30", alerta: "Tipo 1" },
                                     { id: "2", campo: "Apellido", descripcion: "Mi apellido correcto es Mendez", fechaLimite: "2025-02-15", alerta: "Tipo2" },
@@ -192,33 +205,23 @@ sap.ui.define([
                             },
                             {
                                 id: "2",
-                                firstName: "María",
-                                lastName: "González",
-                                email: "maria.gonzalez@example.com",
-                                rut: "98765432-1",
-                                status: "Inactivo",
-                                creationDate: "2023-01-02",
-                                phone: "+56 9 8765 4321"
+                                API_name: "Gasco",
+                                Tipo_conexion: "ODATA",
+                                Metodo: "GET",
+                                Path: "abcd/aa/bd",
+                                Host: "host.cl",
+                                status: "Activo",
+                                creationDate: "2023-01-01",
                             },
                             {
-                                id: "3",
-                                firstName: "Carlos",
-                                lastName: "Sánchez",
-                                email: "carlos.sanchez@example.com",
-                                rut: "11223344-5",
+                                id: "2",
+                                API_name: "Crear_usuarios",
+                                Tipo_conexion: "ODATA",
+                                Metodo: "POST",
+                                Path: "abcd/aa/bd",
+                                Host: "host.cl",
                                 status: "Activo",
-                                creationDate: "2023-01-03",
-                                phone: "+56 9 1122 3344"
-                            },
-                            {
-                                id: "4",
-                                firstName: "Ana",
-                                lastName: "Martínez",
-                                email: "ana.martinez@example.com",
-                                rut: "55667788-0",
-                                status: "Activo",
-                                creationDate: "2023-01-04",
-                                phone: "+56 9 2233 4455"
+                                creationDate: "2023-01-01",
                             }
                         ]
                     })
@@ -484,6 +487,69 @@ sap.ui.define([
             return oTable;
         },
         
+        onCreateConexion: function(){
+            this.oViewCreateConexion = sap.ui.xmlfragment("com.becloud.pdp.gessistemas.view.fragments.createConexion", this);
+            this.getView().addDependent(this.oViewCreateConexion);
+
+            this.oViewCreateConexion.attachAfterClose(function () {
+                this.oViewCreateConexion.destroy();
+            }.bind(this));
+
+            this.getConexion().then(function (responseConexion) {
+
+                if (responseConexion.state) {
+                    this.oViewCreateConexion.open();
+                } else {
+                    this.oViewCreateConexion.destroy();
+                    //MESSAGE
+                }
+            }.bind(this));
+        
+        },
+
+        getConexion: function () {
+   
+            return new Promise(
+                function resolver(resolve) {
+                    resolve({
+                        state: true,
+                        rsp: [
+                            {
+                                "id": "10",
+                                "name_conexion": "Tech Solutions Inc.",
+                                "name_metodo": "GET",
+                                "name_path": "/api/v1/users",
+                                "creationDate": "Fri Jan 17 2025 00:00:00 GMT-0400",
+                                "name_tipo": "API",
+                                "name_estado": "1",
+                                "name_descrip": "Servicio para obtener información de usuarios.",
+                                "name_token": "abc123xyzzzz"
+                            }
+
+                        ]                            
+                    })
+                }.bind(this));
+        },
+
+
+        onRefresh: function () {
+            this.onBusyDialog("Open");
+
+            var oModelConexion= new JSONModel([]);
+            this.getView().setModel(oModelConexion, "oModelConexionFF");
+
+            this.getConexion().then(function (response) {
+                this.onBusyDialog("Close");
+                if (response.state) {
+                    oModelConexion.setData(response.rsp)
+                    oModelConexion.refresh();
+                } else {
+                    MessageBox.error(response.msg, {
+                        title: "Obtención de datos"
+                    });
+                }
+            }.bind(this));
+        },
         onEditRequest: function(userId) {
             console.log("ID del usuario para editar:", userId); // Verifica que se pase correctamente
             // Cerrar el modal de detalles de solicitudes

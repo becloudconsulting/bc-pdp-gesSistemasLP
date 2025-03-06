@@ -45,30 +45,31 @@
                                 <Button icon="sap-icon://excel-attachment" press="onExcel" tooltip="Descargar registros"/>
                                 <ToolbarSpacer/>
                                 <Button class="sapUiSizeCompact" tooltip="Actualizar datos" iconFirst="false" text="Actualizar datos" icon="sap-icon://synchronize" type="Emphasized" press="onRefresh"/>
+                                 <Button class="sapUiSizeCompact" tooltip="Ingresar Conexion" iconFirst="false" text="Ingresar Conexion" icon="sap-icon://create-form" type="Emphasized" press="onCreateConexion"/>
                             </content>
                         </Toolbar>
                     </headerToolbar>
                     <columns>
                         <Column minScreenWidth="Tablet" demandPopin="true">
-                            <Text text="Nombres"/>
+                            <Text text="Nombre"/>
                         </Column>
                         <Column minScreenWidth="Tablet" demandPopin="true">
-                            <Text text="Apellidos"/>
+                            <Text text="Tipo"/>
                         </Column>
                         <Column minScreenWidth="Tablet" demandPopin="true">
-                            <Text text="Correo"/>
+                            <Text text="Método"/>
                         </Column>
                         <Column minScreenWidth="Tablet" demandPopin="true">
-                            <Text text="RUT"/>
+                            <Text text="Path"/>
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Host"/>
                         </Column>
                         <Column minScreenWidth="Tablet" demandPopin="true">
                             <Text text="Estado"/>
                         </Column>
                         <Column minScreenWidth="Tablet" demandPopin="true">
                             <Text text="Fecha Creación"/>
-                        </Column>
-                        <Column minScreenWidth="Tablet" demandPopin="true">
-                            <Text text="Teléfono"/>
                         </Column>
                         <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" vAlign="Middle">
                             <Text text="Acciones"/>
@@ -77,15 +78,16 @@
                     <items>
                         <ColumnListItem type="Detail" detailPress="onEdit" vAlign="Middle">
                             <cells>
-                                <ObjectIdentifier text="{oModelUsersData>firstName}"/>
-                                <ObjectIdentifier text="{oModelUsersData>lastName}"/>
-                                <ObjectIdentifier text="{oModelUsersData>email}"/>
-                                <ObjectIdentifier text="{oModelUsersData>rut}"/>
+                                <ObjectIdentifier text="{oModelUsersData>API_name}"/>
+                                <ObjectIdentifier text="{oModelUsersData>Tipo_conexion}"/>
+                                <ObjectIdentifier text="{oModelUsersData>Metodo}"/>
+                                <ObjectIdentifier text="{oModelUsersData>Path}"/>
+                                <ObjectIdentifier text="{oModelUsersData>Host}"/>
                                 <ObjectStatus text="{path: 'oModelUsersData>status', formatter: '.formatterEstado'}"
                                             state="{path: 'oModelUsersData>status', formatter: '.formatterState'}"
                                             inverted="true"/>
                                 <ObjectIdentifier text="{path: 'oModelUsersData>creationDate', formatter: '.formatDate'}"/>
-                                <ObjectIdentifier text="{oModelUsersData>phone}"/>
+          
                                 <HBox justifyContent="SpaceAround">
                                     <Button icon="sap-icon://connected" press="onShowInformation" tooltip="Ver Detalles" type="Transparent"/>
                                     <Button icon="sap-icon://detail-view" press="onShowRequestUser" tooltip="Peticiones" type="Transparent"/>
@@ -99,7 +101,7 @@
             </VBox>
             
             <VBox class="sapUiSmallMargin" visible="{= ${/isSecondTableVisible} === true }"> 
-                <Table id="idListUserTable" sticky="ColumnHeaders,HeaderToolbar" items="{path: 'oModelUserData>/', sorter: [{path: 'id', descending: false}]}" mode="None" updateFinished="updateFinishedUser" growing="true" growingThreshold="10">
+                <Table id="idListUserTable" sticky="ColumnHeaders,HeaderToolbar" items="{path: 'oModelUsersData>/', sorter: [{path: 'id', descending: false}]}" mode="None" updateFinished="updateFinishedUser" growing="true" growingThreshold="10">
                     <headerToolbar>
                         <Toolbar>
                             <content>
@@ -114,7 +116,7 @@
                     </headerToolbar>
                     <columns>
                         <Column minScreenWidth="Tablet" demandPopin="true">
-                            <Text text="Nombres"/>
+                            <Text text="Nombresitos"/>
                         </Column>
                         <Column minScreenWidth="Tablet" demandPopin="true">
                             <Text text="Apellidos"/>
@@ -141,15 +143,15 @@
                     <items>
                         <ColumnListItem type="Detail" detailPress="onEdit" vAlign="Middle">
                             <cells>
-                                <ObjectIdentifier text="{oModelUserData>firstName}"/>
-                                <ObjectIdentifier text="{oModelUserData>lastName}"/>
-                                <ObjectIdentifier text="{oModelUserData>email}"/>
-                                <ObjectIdentifier text="{oModelUserData>rut}"/>
-                                <ObjectStatus text="{path: 'oModelUserData>status', formatter: '.formatterEstado'}"
-                                            state="{path: 'oModelUserData>status', formatter: '.formatterState'}"
+                                <ObjectIdentifier text="{oModelUsersData>API_name}"/>
+                                <ObjectIdentifier text="{oModelUsersData>lastName}"/>
+                                <ObjectIdentifier text="{oModelUsersData>email}"/>
+                                <ObjectIdentifier text="{oModelUsersData>rut}"/>
+                                <ObjectStatus text="{path: 'oModelUsersData>status', formatter: '.formatterEstado'}"
+                                            state="{path: 'oModelUsersData>status', formatter: '.formatterState'}"
                                             inverted="true"/>
-                                <ObjectIdentifier text="{path: 'oModelUserData>creationDate', formatter: '.formatDate'}"/>
-                                <ObjectIdentifier text="{oModelUserData>phone}"/>
+                                <ObjectIdentifier text="{path: 'oModelUsersData>creationDate', formatter: '.formatDate'}"/>
+                                <ObjectIdentifier text="{oModelUsersData>phone}"/>
                                 <HBox justifyContent="SpaceAround">
                                     <Button icon="sap-icon://connected" press="onShowInformation" tooltip="Ver Detalles" type="Transparent"/>
                                     <Button icon="sap-icon://activity-2" press="onCreateRequest" tooltip="Peticion" type="Transparent"/>

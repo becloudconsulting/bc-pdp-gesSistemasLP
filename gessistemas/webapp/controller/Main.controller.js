@@ -81,6 +81,15 @@ sap.ui.define([
                 });
                 this.getView().setModel(OmodelTableUser);
 
+                //AGREGUÉ EL MODELO PARA LAS CREDENCIALES
+                //Datos Estaticos
+                this.onBusyDialog("Open");
+                this.getCredenciales().then(function (responseCredenciales){
+                    var oModelCredenciales = new JSONModel(responseCredenciales.rsp);
+                    this.getView().setModel(oModelCredenciales, "oModelCredencialesFF");
+                    this.onBusyDialog("Close");
+                }.bind(this))
+
                 //Datos Estaticos
                 this.onBusyDialog("Open");
                 this.getCompanySystem().then(function (responseCompanySystem){
@@ -133,7 +142,10 @@ sap.ui.define([
                 var oTable = this.getView().byId("idProductsTable");
                 oTable.getBinding("items").filter([], sap.ui.model.FilterType.Application);
             },
-
+            onNewSystem: function () {
+                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("RouteNewSystem");
+            },
             onListUserData: function () {
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("RouteListUserData");
@@ -187,23 +199,16 @@ sap.ui.define([
             onSaveCreate: function () {
                 if (this.validateCreate()) {
                     var companySystemName = sap.ui.getCore().byId("ipNameCreate").getValue().trim();
-                    var method = sap.ui.getCore().byId("slMethodCreate").getSelectedKey();
-                    var endPoint = sap.ui.getCore().byId("ipEndPointCreate").getValue().trim();
-                    var tipoConexion = sap.ui.getCore().byId("ipTypeConnectionCreate").getSelectedKey();
+
                     var status = sap.ui.getCore().byId("slStatusCreate").getSelectedKey().trim();
                     var statusCheck = (status === "Activo")
                     var descripcion = sap.ui.getCore().byId("ipDescriptionCreate").getValue().trim();
-                    var token = sap.ui.getCore().byId("ipTokenCreate").getValue().trim();
                     
                     var json = {
                         id : 3,
                         companySystemName: companySystemName,
-                        method: method,
-                        endPoint: endPoint,
-                        tipoConexion: tipoConexion,
                         status: statusCheck,
                         descripcion: descripcion,
-                        token: token,
                         creationDate: new Date().toISOString(),
                     };
 
@@ -262,6 +267,96 @@ sap.ui.define([
                     });
                 } 
             },
+
+            onCredenciales: function () {
+                this.oViewCreate = sap.ui.xmlfragment("com.becloud.pdp.gessistemas.view.fragments.Credenciales", this);
+                this.getView().addDependent(this.oViewCreate);
+
+                this.oViewCreate.attachAfterClose(function () {
+                    this.oViewCreate.destroy();
+                }.bind(this));
+
+                this.getCredenciales().then(function (responseCredenciales) {
+                    if (responseCredenciales.state) {
+                        this.oViewCreate.open();
+                    } else {
+                        this.oViewCreate.destroy();
+                        //MESSAGE
+                    }
+                }.bind(this));
+            },
+
+
+            getCredenciales: function(){
+
+                return new Promise(
+                    function resolver(resolve) {
+                        resolve({
+                            state: true,
+                            rsp: [
+                                {
+                                    "id": "1",
+                                    "Tipo_autent": "Autenticación A",
+                                    "URI": "uri de prueba",
+                                    "Usuario": "Admin",
+                                    "Contraseña": "*************",
+                                }
+                            ]                            
+                        })
+
+                    }.bind(this))
+
+
+            },
+
+
+            onSaveCredenciales: function(){
+                if (this.validateCreate()) {
+                    var autenticacion = sap.ui.getCore().byId("ipAutenticacion").getValue().trim();
+                    var method = sap.ui.getCore().byId("slMethodCreate").getSelectedKey();
+                    var endPoint = sap.ui.getCore().byId("ipEndPointCreate").getValue().trim();
+                    var tipoConexion = sap.ui.getCore().byId("ipTypeConnectionCreate").getSelectedKey();
+                    var status = sap.ui.getCore().byId("slStatusCreate").getSelectedKey().trim();
+                    var statusCheck = (status === "Activo")
+                    var descripcion = sap.ui.getCore().byId("ipDescriptionCreate").getValue().trim();
+ 
+                    
+                    var json = {
+                        id : 3,
+                        autenticacion: companySystemName,
+                        method: method,
+                        endPoint: endPoint,
+                        tipoConexion: tipoConexion,
+                        status: statusCheck,
+                        descripcion: descripcion,
+                        token: token,
+                        creationDate: new Date().toISOString(),
+                    };
+
+                    var oModelCompanySystem = this.getView().getModel("oModelCompanySystem");
+                    var oData = oModelCompanySystem.getData();
+
+                    if (!Array.isArray(oData)) {
+                        oData = [];
+                    }
+            
+                    oData.push(json);
+            
+                    oModelCompanySystem.setData(oData);
+            
+                    MessageBox.success("Se ha creado el sistema correctamente.");
+                    this.onCloseCreate();
+                } else {
+                    MessageBox.error("Complete todos los campos para continuar.", {
+                        title: "Validación"
+                    });
+                } 
+
+
+
+
+            },
+
 
             onEdit: function (oEvent) {
                 this.oViewEditCompanySystem = sap.ui.xmlfragment("com.becloud.pdp.gessistemas.view.fragments.editCompanySystem", this);
@@ -714,14 +809,15 @@ sap.ui.define([
                             rsp: [
                                 {
                                     id: "1",
-                                    firstName: "Juan",
-                                    lastName: "Pérez",
+                                    Nombre_api: "Api 1",
+                                    lastName: "Péreziyo",
                                     email: "juan.perez@example.com",
                                     rut: "12345678-9",
                                     status: "Activo",
                                     creationDate: "2023-01-01",
                                     phone: "+56 9 1234 5678"
                                 },
+                                /*
                                 {
                                     id: "2",
                                     firstName: "María",
@@ -751,7 +847,7 @@ sap.ui.define([
                                     status: "Activo",
                                     creationDate: "2023-01-04",
                                     phone: "+56 9 2233 4455"
-                                }
+                                }*/
                             ]
                         })
                         /* this.getOwnerComponent().getModel().read("/Users-Data", {
@@ -792,22 +888,8 @@ sap.ui.define([
                     "required": true,
                     "tipo": "ip",
                     "texto":"Escriba un Nombre."
-                },{
-                    "id": "slMethodCreate",
-                    "required": true,
-                    "tipo": "sl",
-                    "texto":"Seleccione un Metodo."
-                },{
-                    "id": "ipEndPointCreate",
-                    "required": true,
-                    "tipo": "ip",
-                    "texto":"Escriba un EndPoint."
-                },{
-                    "id": "ipTypeConnectionCreate",
-                    "required": true,
-                    "tipo": "sl",
-                    "texto":"Seleccione un Tipo de Conexion."
-                },{
+                },
+                {
                     "id": "slStatusCreate",
                     "required": true,
                     "tipo": "sl",
@@ -817,11 +899,6 @@ sap.ui.define([
                     "required": true,
                     "tipo": "ip",
                     "texto":"Escriba una Descripción."
-                },{
-                    "id": "ipTokenCreate",
-                    "required": true,
-                    "tipo": "ip",
-                    "texto":"Escriba el Token."
                 }];
                 return this.validate(fields) === false;
             },
@@ -1036,6 +1113,20 @@ sap.ui.define([
             
                 oModel.setProperty("/isSecondTableVisible", !isSecondTableVisible);
             }
+
+
+
+
+            //FUNCIONES PARA AGREGAR CAMPOS DINÁMICOS AL INGRESAR UNA NUEVA API
+
+            
+    
+        
             
         });
     });
+
+
+
+
+  

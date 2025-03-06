@@ -1,0 +1,61 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog title="Nueva conexión" type='Message' contentWidth="600px" class="sapUiNoContentPadding">
+        <content>
+            <l:Grid vSpacing="1" hSpacing="1" width="100%" class="sapUiSmallMargin">
+                <VBox>
+                    <Title text="Información de conexión"/>
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12"/>
+                    </layoutData>
+                </VBox>
+                <VBox>
+                    <Label text="Nombre conexión" />
+                    <Input id="name_conexion" width="100%" liveChange="liveChange"/>
+                    <Label text="Método" />
+                    <Select id="name_metodo" forceSelection="true" width="100%">
+                        <core:Item key="" text=""/>
+                        <core:Item key="GET" text="GET"/>
+                        <core:Item key="POST" text="POST"/>
+                        <core:Item key="PUT" text="PUT"/>
+                        <core:Item key="DELETE" text="DELETE"/>
+                    </Select>
+                    <Label text="Path/Endpoint" />
+                    <Input id="name_path" width="100%" liveChange="liveChange"/>
+                    <Label text="Tipo de Conexión" />
+                    <Select id="name_tipo" forceSelection="true" width="100%">
+                        <core:Item key="" text=""/>
+                        <core:Item key="API" text="API"/>
+                        <core:Item key="ODATA" text="ODATA"/>
+                    </Select>
+                    <Label text="Host" />
+                    <Input id="name_host" width="100%" liveChange="liveChange"/>
+                    <Label text="Estado" />
+                    <Select id="name_estado" forceSelection="true" width="100%">
+                        <core:Item key="" text=""/>
+                        <core:Item key="Activo" text="Activo"/>
+                        <core:Item key="Inactivo" text="Inactivo"/>
+                    </Select>
+                    <Label text="Token" /> 
+                    <Input id="name_token" width="100%" liveChange="liveChange"/>
+                    <Label text="Parámetros de entrada" /> 
+                    <Input id="name_param" width="100%" liveChange="liveChange"/>
+                    <Label text="Parámetros de salida" /> 
+                    <Input id="name_paramsal" width="100%" liveChange="liveChange"/>
+                    <Label text="Descripción" />
+                    <TextArea id="name_descrip" rows="4" width="100%" liveChange="liveChange"/>
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12"/>
+                    </layoutData>
+                </VBox>
+            </l:Grid >
+        </content>
+        <beginButton>
+            <Button text="Guardar" type="Emphasized" press="onSaveCreate"/>
+        </beginButton>
+        <endButton>
+            <Button text="Cancelar" press="onCloseCreate"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

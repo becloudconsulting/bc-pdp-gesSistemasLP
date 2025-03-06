@@ -1,0 +1,408 @@
+<mvc:View
+    height="100%"
+    controllerName="com.becloud.pdp.gessistemas.controller.NewSystem"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+>
+    <NavContainer id="wizardNavContainer">
+        <pages>
+            <Page
+                id="wizardContentPage"
+                showHeader="false"
+            >
+                <content>
+                    <Wizard
+                        id="CreateProductWizard"
+                        class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+                        complete="wizardCompletedHandler"
+                    >
+                        <WizardStep
+                            id="ProductTypeStep"
+                            title="Información del sistema"
+                            validated="true"
+                        >
+                            <MessageStrip
+                                class="sapUiSmallMarginBottom"
+                                text="Ingrese los datos del sistema"
+                                showIcon="true"
+                            />
+
+                            <form:SimpleForm
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                            >
+                                <Label text="Nombre del Sistema*" />
+                                <Input
+                                    id="ipNameCreate"
+                                    width="100%"
+                                    liveChange="liveChange"
+                                />
+                                <Label text="Descripción" />
+                                <TextArea
+                                    id="ipDescriptionCreate"
+                                    rows="2"
+                                    width="100%"
+                                    liveChange="liveChange"
+                                />
+                            </form:SimpleForm>
+                        </WizardStep>
+                        <WizardStep
+                            id="ProductInfoStep"
+                            validated="true"
+                            title="Credenciales"
+                        >
+                            <MessageStrip
+                                class="sapUiSmallMarginBottom"
+                                text="Ingrese las credenciales del sistema"
+                                showIcon="true"
+                            />
+                            <form:SimpleForm
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                            >
+                                <Label text="Tipo de autenticación*" />
+                                <Select
+                                    id="ipTypeAuth"
+                                    forceSelection="true"
+                                    width="100%"
+                                >
+                                    <core:Item
+                                        key=""
+                                        text=""
+                                    />
+                                    <core:Item
+                                        key="API"
+                                        text="A"
+                                    />
+                                    <core:Item
+                                        key="ODATA"
+                                        text="B"
+                                    />
+                                    <core:Item
+                                        key="C"
+                                        text="C"
+                                    />
+                                    <core:Item
+                                        key="D"
+                                        text="D"
+                                    />
+                                </Select>
+                                <Label text="URI*" />
+                                <Input
+                                    id="ipURI"
+                                    width="100%"
+                                    liveChange="liveChange"
+                                />
+                                <Label text="Usuario*" />
+                                <Input
+                                    id="ipUsuario"
+                                    width="100%"
+                                    liveChange="liveChange"
+                                />
+                                <Label text="Contraseña*" />
+                                <Input
+                                    id="ipPSW"
+                                    width="100%"
+                                    liveChange="liveChange"
+                                />
+                            </form:SimpleForm>
+                        </WizardStep>
+                        <WizardStep
+                            id="OptionalInfoStep"
+                            validated="true"
+                            activate="optionalStepActivation"
+                            title="API"
+                        >
+                            <MessageStrip
+                                class="sapUiSmallMarginBottom"
+                                text="En caso de crear una API ingrese los campos obligatorios de la conexión"
+                                showIcon="true"
+                            />
+
+                            <form:SimpleForm
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                            >
+                          
+                                <Label text="Nombre conexión" />
+                                <Input
+                                    id="name_conexion"
+                                    width="100%"
+                                    liveChange="liveChange"
+                                />
+                                <Label text="Método" />
+                                <Select
+                                    id="name_metodo"
+                                    forceSelection="true"
+                                    width="100%"
+                                >
+                                    <core:Item
+                                        key=""
+                                        text=""
+                                    />
+                                    <core:Item
+                                        key="GET"
+                                        text="GET"
+                                    />
+                                    <core:Item
+                                        key="POST"
+                                        text="POST"
+                                    />
+                                    <core:Item
+                                        key="PUT"
+                                        text="PUT"
+                                    />
+                                    <core:Item
+                                        key="DELETE"
+                                        text="DELETE"
+                                    />
+                                </Select>
+                                <Label text="Path/Endpoint" />
+                                <Input
+                                    id="name_path"
+                                    width="100%"
+                                    liveChange="liveChange"
+                                />
+                                <Label text="Tipo de Conexión" />
+                                <Select
+                                    id="name_tipo"
+                                    forceSelection="true"
+                                    width="100%"
+                                >
+                                    <core:Item
+                                        key=""
+                                        text=""
+                                    />
+                                    <core:Item
+                                        key="API"
+                                        text="API"
+                                    />
+                                    <core:Item
+                                        key="ODATA"
+                                        text="ODATA"
+                                    />
+                                </Select>
+                                <Label text="Host" />
+                                <Input
+                                    id="name_host"
+                                    width="100%"
+                                    liveChange="liveChange"
+                                />
+                                <Label text="Estado" />
+                                <Select
+                                    id="name_estado"
+                                    forceSelection="true"
+                                    width="100%"
+                                >
+                                    <core:Item
+                                        key=""
+                                        text=""
+                                    />
+                                    <core:Item
+                                        key="Activo"
+                                        text="Activo"
+                                    />
+                                    <core:Item
+                                        key="Inactivo"
+                                        text="Inactivo"
+                                    />
+                                </Select>
+                                <Label text="Token" />
+                                <Input
+                                    id="name_token"
+                                    width="100%"
+                                    liveChange="liveChange"
+                                />
+                                <Label text="Parámetros de entrada" />
+                                <Input
+                                    id="name_param"
+                                    width="100%"
+                                    liveChange="liveChange"
+                                />
+                                <Label text="Parámetros de salida" />
+                                <Input
+                                    id="name_paramsal"
+                                    width="100%"
+                                    liveChange="liveChange"
+                                />
+                                <Label text="Descripción" />
+                                <TextArea
+                                    id="name_descrip"
+                                    rows="4"
+                                    width="100%"
+                                    liveChange="liveChange"
+                                />
+                            
+                            </form:SimpleForm>
+                            <HBox justifyContent="End"  >
+                                <Button class="sapUiSizeCompact" tooltip="Guardar" iconFirst="false" text="Guardar conexión actual" icon="sap-icon://create-form" type="Emphasized" press="onCreate"/>
+                        
+                                
+                            </HBox>
+                            <HBox justifyContent="End"  >
+                               <Button class="sapUiSizeCompact" tooltip="Agregar nueva conexión" iconFirst="false" text="Agregar nueva conexión" icon="sap-icon://synchronize" type="Emphasized" press="onRefresh"/>
+                                
+                            </HBox>
+                            <HBox justifyContent="End"  >
+                               <Button class="sapUiSizeCompact" tooltip="Continuar sin ingresar conexión" iconFirst="false" text="Continuar sin ingresar conexión" icon="sap-icon://synchronize" type="Emphasized" press="onRefresh"/>
+                                
+                            </HBox>
+                        </WizardStep>
+                       
+                    </Wizard>
+                </content>
+                <footer>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            text="Cancel"
+                            press="handleWizardCancel"
+                        />
+                    </OverflowToolbar>
+                </footer>
+            </Page>
+            <Page
+                id="wizardReviewPage"
+                showHeader="false"
+            >
+                <content>
+                    <form:SimpleForm
+                        title="1. Product Type"
+                        editable="false"
+                        layout="ResponsiveGridLayout"
+                    >
+                        <form:content>
+                            <Label text="Type" />
+                            <Text
+                                id="ProductTypeChosen"
+                                text="{/productType}"
+                            />
+                            <Link
+                                press="editStepOne"
+                                text="Edit"
+                            />
+                        </form:content>
+                    </form:SimpleForm>
+
+                    <form:SimpleForm
+                        title="2. Product Information"
+                        editable="false"
+                        layout="ResponsiveGridLayout"
+                    >
+                        <form:content>
+                            <Label text="Name" />
+                            <Text
+                                id="ProductNameChosen"
+                                text="{/productName}"
+                            />
+                            <Label text="Weight" />
+                            <Text
+                                id="ProductWeightChosen"
+                                text="{/productWeight}"
+                            />
+                            <Label text="Manufacturer" />
+                            <Text
+                                id="ProductManufacturerChosen"
+                                text="{/productManufacturer}"
+                            />
+                            <Label text="Description" />
+                            <Text
+                                id="ProductDescriptionChosen"
+                                text="{/productDescription}"
+                            />
+                            <Link
+                                press="editStepTwo"
+                                text="Edit"
+                            />
+                        </form:content>
+                    </form:SimpleForm>
+
+                    <form:SimpleForm
+                        title="3. Optional Information"
+                        editable="false"
+                        layout="ResponsiveGridLayout"
+                    >
+                        <form:content>
+                            <Label text="Some text" />
+                            <Text
+                                text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. "
+                            />
+                            <Label text="Manufacturing Date" />
+                            <Text
+                                id="ManufacturingDate"
+                                text="{/manufacturingDate}"
+                            />
+                            <Label text="Availability" />
+                            <Text
+                                id="AvailabilityChosen"
+                                text="{/availabilityType}"
+                            />
+                            <Label text="Size" />
+                            <HBox>
+                                <Text
+                                    id="Size"
+                                    text="{/size}"
+                                />
+                                <Text
+                                    id="Size2"
+                                    class="sapUiTinyMarginBegin"
+                                    text="{/measurement}"
+                                />
+                            </HBox>
+                            <Link
+                                press="editStepThree"
+                                text="Edit"
+                            />
+                        </form:content>
+                    </form:SimpleForm>
+
+                    <form:SimpleForm
+                        title="4. Pricing"
+                        editable="false"
+                        layout="ResponsiveGridLayout"
+                    >
+                        <form:content>
+                            <Label text="Price" />
+                            <Text
+                                id="ProductPriceChosen"
+                                text="{/productPrice}"
+                            />
+                            <Label text="Discount Group" />
+                            <Text
+                                id="DiscountGroupChosen"
+                                text="{/discountGroup}"
+                            />
+                            <Label text="VAT Included" />
+                            <Text
+                                id="ProductVATChosen"
+                                text="{/productVAT}"
+                            />
+                            <Link
+                                press="editStepFour"
+                                text="Edit"
+                            />
+                        </form:content>
+                    </form:SimpleForm>
+                </content>
+                <footer>
+                    <Bar>
+                        <contentRight>
+                            <Button
+                                text="Submit"
+                                press="handleWizardSubmit"
+                            />
+                            <Button
+                                text="Cancel"
+                                press="handleWizardCancel"
+                            />
+                        </contentRight>
+                    </Bar>
+                </footer>
+            </Page>
+        </pages>
+    </NavContainer>
+</mvc:View>

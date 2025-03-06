@@ -43,7 +43,7 @@
                                 <Title id="tProducts" text="Registros (0)"/>
                                 <Button icon="sap-icon://excel-attachment" press="onExcel" tooltip="Descargar registros"/>
                                 <ToolbarSpacer/>
-                                <Button class="sapUiSizeCompact" tooltip="Ingresar Sistema" iconFirst="false" text="Ingresar Sistema" icon="sap-icon://create-form" type="Emphasized" press="onCreate"/>
+                                <Button class="sapUiSizeCompact" tooltip="Ingresar Sistema" iconFirst="false" text="Ingresar Sistema" icon="sap-icon://create-form" type="Emphasized" press="onNewSystem"/>
                                 <Button class="sapUiSizeCompact" tooltip="Actualizar datos" iconFirst="false" text="Actualizar datos" icon="sap-icon://synchronize" type="Emphasized" press="onRefresh"/>
                             </content>
                         </Toolbar>
@@ -54,12 +54,6 @@
                         </Column>
                         <Column minScreenWidth="Tablet" demandPopin="true">
                             <Text text="Sistema"/>
-                        </Column>
-                        <Column minScreenWidth="Tablet" demandPopin="true">
-                            <Text text="Metodo"/>
-                        </Column>
-                        <Column minScreenWidth="Tablet" demandPopin="true">
-                            <Text text="EndPoint"/>
                         </Column>
                         <Column minScreenWidth="Tablet" demandPopin="true">
                             <Text text="Fecha Creación"/>
@@ -76,13 +70,12 @@
                             <cells>
                                 <ObjectIdentifier text="{oModelCompanySystem>id}"/>
                                 <ObjectIdentifier text="{oModelCompanySystem>companySystemName}"/>
-                                <ObjectIdentifier text="{oModelCompanySystem>method}"/>
-                                <ObjectIdentifier text="{oModelCompanySystem>endPoint}"/>
                                 <ObjectIdentifier text="{path: 'oModelCompanySystem>creationDate', formatter:'.formatDate'}"/>
                                 <ObjectStatus text="{path: 'oModelCompanySystem>status', formatter: '.formatterEstado'}" state="{path: 'oModelCompanySystem>status', formatter: '.formatterState'}" inverted="true"/>
                                 <HBox justifyContent="SpaceAround">
-                                    <Button icon="sap-icon://connected" press="onShowInformation" tooltip="Ver Detalles" type="Transparent"/>
-                                    <Button icon="sap-icon://activity-2" press="onListUserData" tooltip="Peticion" type="Transparent"/>
+                                    <Button icon="sap-icon://detail-view" press="onShowInformation" tooltip="Ver Detalles" type="Transparent"/>
+                                    <Button icon="sap-icon://connected" press="onListUserData" tooltip="Conexiones" type="Transparent"/>
+                                    <Button icon="sap-icon://role" press="onCredenciales" tooltip="Credenciales" type="Transparent"/>
                                 </HBox>
                             </cells>
                         </ColumnListItem>
