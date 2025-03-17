@@ -222,12 +222,16 @@
                                     width="100%"
                                     liveChange="liveChange"
                                 />
+                                
+
                                 <Label text="Parámetros de salida" />
-                                <Input
-                                    id="name_paramsal"
-                                    width="100%"
-                                    liveChange="liveChange"
-                                />
+                                
+
+                                 <HBox justifyContent="Start"  >
+                                <Button class="sapUiSizeCompact" tooltip="Guardar" iconFirst="false" text="Agregar parámetros de entrada" icon="sap-icon://create-form" type="Emphasized" press="onCreateParam"/>
+                        
+                                
+                            </HBox>
                                 <Label text="Descripción" />
                                 <TextArea
                                     id="name_descrip"

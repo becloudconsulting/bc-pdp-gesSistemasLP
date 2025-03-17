@@ -29,7 +29,7 @@
                                 displayFormat="yyyy/MM/dd"
                                 change="onDateRangeChange"
                             />
-
+                            
                         </fb:control>
                     </fb:FilterItem>
                 </fb:filterItems>

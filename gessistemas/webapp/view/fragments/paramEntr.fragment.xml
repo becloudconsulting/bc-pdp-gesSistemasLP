@@ -1,0 +1,244 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:fo="sap.ui.layout.form"
+>
+    <Dialog
+        title="MODULO CONTRATOS"
+        type='Message'
+        contentWidth="800px"
+        horizontalScrolling="false"
+        class="sapUiNoContentPadding"
+    >
+        <content>
+            <VBox
+                class="sapUiSmallMargin"
+                alignItems="Start"
+                width="100%"
+            >
+                <fo:SimpleForm
+                    id="SimpleFormDisplay354"
+                    editable="false"
+                    layout="ResponsiveGridLayout"
+                    labelSpanXL="3"
+                    labelSpanL="3"
+                    labelSpanM="3"
+                    labelSpanS="12"
+                    adjustLabelSpan="true"
+                    emptySpanXL="4"
+                    emptySpanL="4"
+                    emptySpanM="4"
+                    emptySpanS="0"
+                    columnsXL="1"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="true"
+                >
+                    <fo:content>
+                        <!-- Label y Input en un HBox para alinearlos como deseas -->
+
+                        <Label text="Descripción" />
+                        <Text
+                            id="nameText"
+                            text="Modulo que contiene los datos de los contratos del departamento de seguros y finanzas"
+                        />
+
+                        <Label text="Plazo de conservación del conjunto de datos" />
+                        <Text text="12 meses" />
+
+                        <Label text="Creado por:" />
+                        <Text text="Admin_02" />
+
+                        <Label text="Terminos y condiciones asociados" />
+                        <HBox justifyContent="Start">
+                            <Button
+                                class="sapUiSizeCompact"
+                                tooltip="Ver"
+                                iconFirst="false"
+                                text="Ver"
+                                press="onVerTermcond"
+                                type="Transparent"
+                            />
+                        </HBox>
+
+                        <Label
+                            text="Políticas asociadas"
+                            class="políticasLabel"
+                        />
+                        <HBox justifyContent="Start">
+                            <Button
+                                class="sapUiSizeCompact"
+                                tooltip="Ver"
+                                iconFirst="false"
+                                text="Ver"
+                                press="onVerTermcond"
+                                type="Transparent"
+                            />
+                        </HBox>
+
+                       
+                       
+
+                     
+                    </fo:content>
+                </fo:SimpleForm>
+
+
+                <!--<VBox alignItems="Center">
+
+    		<Text class="myTextWithMargin" width="70%" maxLines="5" text="Lorem ipsum dolor st amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat" />
+	</VBox>-->
+            </VBox>
+        </content>
+    
+
+        <content >
+
+          
+            <VBox   >
+                <Panel
+                    width="100%"
+                    height="auto"
+                    
+                    
+                >
+                   <Table
+                                    id="idCamposProp"
+                                    sticky="ColumnHeaders,HeaderToolbar"
+                                    items="{path: 'oModelParam>/', sorter: [{path: 'ID_PROP', descending: false}]}"
+                                    mode="None"
+                                    updateFinished="updateFinished"
+                                    growing="true"
+                                    growingThreshold="10"
+                                >
+                                    <headerToolbar>
+                                        <Toolbar>
+                                            <content>
+                                                <Title
+                                                    id="tUsers"
+                                                    text="Agregué los campos del modulo"
+                                                />
+                                                <ToolbarSpacer />
+                                                <Button
+                                                    class="sapUiSizeCompact"
+                                                    iconFirst="false"
+                                                    text="Añadir campo"
+                                                    type="Default"
+                                                    press="onNewFieldonCrear"
+                                                />
+                                        
+                                            </content>
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="150px"
+                                        >
+                                            <Text text="ID" />
+                                        </Column>
+
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="200px"
+                                        >
+                                            <Text text="Nombre" />
+                                        </Column>
+
+                                            <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="200px"
+                                        >
+                                            <Text text="Descripción" />
+                                        </Column>
+
+                                    
+
+                                            <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="200px"
+                                        >
+                                            <Text text="Plazo conservación dato" />
+                                        </Column>
+
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="60px"
+                                        >
+                                            <Text text="" />
+                                        </Column>
+
+                                        
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <Input
+                                                    value="{oModelParam>ID_PROP}"
+                                                    editable="{oModelParam>editable}"
+                                                />
+                                                <Input
+                                                    value="{oModelParam>NOMBRE_CAMPO}"
+                                                    editable="{oModelParam>editable}"
+                                                />
+
+                                                   <Input
+                                                    value="{oModelParam>DESCRIP_CAMPO}"
+                                                    editable="{oModelParam>editable}"
+                                                />
+
+                                                 <Input
+                                                    value="{oModelParam>PLAZO_INDIVIDUAL}"
+                                                    editable="{oModelParam>editable}"
+                                                />
+                                                <HBox
+                                                    
+                                                    width= "10px"
+                                                >
+                                                    <Button
+                                                        icon="sap-icon://decline"
+                                                        press="onEliminarCampoNewProp"
+                                                        tooltip="Eliminar campo"
+                                                        type="Transparent"
+                                                    />
+
+                                    
+                                                
+                                                </HBox>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+
+                                    
+                                </Table>
+
+                </Panel>
+            </VBox>
+        </content>
+
+        <beginButton>
+            <Button
+                text="Guardar"
+                type="Emphasized"
+                press="onSaveCreate"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                text="Cancelar"
+                press="onCloseCreate"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
+
+
+
+
+
