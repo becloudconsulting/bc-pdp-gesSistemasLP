@@ -3,221 +3,299 @@
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
     xmlns:fo="sap.ui.layout.form"
+    xmlns:k="sap.m"
+    xmlns:dnd="sap.ui.core.dnd"
+    xmlns:u="sap.ui.unified"
 >
+    <k:Page
+        showHeader="false"
+        enableScrolling="false"
+    >
+        <k:content>
+            <TreeTable
+                id="TreeTable"
+                rows="{path:'/catalog/clothing', parameters: {arrayNames:['categories']}}"
+                selectionMode="MultiToggle"
+                enableSelectAll="false"
+                ariaLabelledBy="title"
+            >
+                <extension>
+                    <k:OverflowToolbar style="Clear">
+                        <k:Title
+                            id="title"
+                            text="Clothing"
+                        />
+                        <k:Button
+                            id="cut"
+                            text="Cut"
+                            icon="sap-icon://scissors"
+                            press="onCut"
+                        />
+                        <k:Button
+                            id="paste"
+                            text="Paste"
+                            icon="sap-icon://paste"
+                            press="onPaste"
+                            enabled="false"
+                        />
+                        <k:ToolbarSpacer />
+                        <k:Button
+                            text="Collapse all"
+                            press="onCollapseAll"
+                        />
+                        <k:Button
+                            text="Expand first level"
+                            press="onExpandFirstLevel"
+                        />
+                    </k:OverflowToolbar>
+                </extension>
+                <dragDropConfig>
+                    <dnd:DragDropInfo
+                        sourceAggregation="rows"
+                        targetAggregation="rows"
+                        dragStart="onDragStart"
+                        drop="onDrop"
+                    />
+                </dragDropConfig>
+                <columns>
+                    <Column width="13rem">
+                        <k:Label text="Categories" />
+                        <template>
+                            <k:Text
+                                text="{name}"
+                                wrapping="false"
+                            />
+                        </template>
+                    </Column>
+                    <Column width="9rem">
+                        <k:Label text="Price" />
+                        <template>
+                            <u:Currency
+                                value="{amount}"
+                                currency="{currency}"
+                            />
+                        </template>
+                    </Column>
+                    <Column>
+                        <k:Label text="Size" />
+                        <template>
+                            <k:Select
+                                items="{path: '/sizes', templateShareable: true}"
+                                selectedKey="{size}"
+                                visible="{= !!${size}}"
+                                forceSelection="false"
+                            >
+                                <core:Item
+                                    key="{key}"
+                                    text="{value}"
+                                />
+                            </k:Select>
+                        </template>
+                    </Column>
+                </columns>
+            </TreeTable>
+        </k:content>
+    </k:Page>
+
     <Dialog
-        title="MODULO CONTRATOS"
+        title="Parámetros"
         type='Message'
-        contentWidth="800px"
+        contentWidth="1200px"
         horizontalScrolling="false"
         class="sapUiNoContentPadding"
     >
         <content>
-            <VBox
-                class="sapUiSmallMargin"
-                alignItems="Start"
-                width="100%"
-            >
-                <fo:SimpleForm
-                    id="SimpleFormDisplay354"
-                    editable="false"
-                    layout="ResponsiveGridLayout"
-                    labelSpanXL="3"
-                    labelSpanL="3"
-                    labelSpanM="3"
-                    labelSpanS="12"
-                    adjustLabelSpan="true"
-                    emptySpanXL="4"
-                    emptySpanL="4"
-                    emptySpanM="4"
-                    emptySpanS="0"
-                    columnsXL="1"
-                    columnsL="1"
-                    columnsM="1"
-                    singleContainerFullSize="true"
-                >
-                    <fo:content>
-                        <!-- Label y Input en un HBox para alinearlos como deseas -->
-
-                        <Label text="Descripción" />
-                        <Text
-                            id="nameText"
-                            text="Modulo que contiene los datos de los contratos del departamento de seguros y finanzas"
-                        />
-
-                        <Label text="Plazo de conservación del conjunto de datos" />
-                        <Text text="12 meses" />
-
-                        <Label text="Creado por:" />
-                        <Text text="Admin_02" />
-
-                        <Label text="Terminos y condiciones asociados" />
-                        <HBox justifyContent="Start">
-                            <Button
-                                class="sapUiSizeCompact"
-                                tooltip="Ver"
-                                iconFirst="false"
-                                text="Ver"
-                                press="onVerTermcond"
-                                type="Transparent"
-                            />
-                        </HBox>
-
-                        <Label
-                            text="Políticas asociadas"
-                            class="políticasLabel"
-                        />
-                        <HBox justifyContent="Start">
-                            <Button
-                                class="sapUiSizeCompact"
-                                tooltip="Ver"
-                                iconFirst="false"
-                                text="Ver"
-                                press="onVerTermcond"
-                                type="Transparent"
-                            />
-                        </HBox>
-
-                       
-                       
-
-                     
-                    </fo:content>
-                </fo:SimpleForm>
-
-
-                <!--<VBox alignItems="Center">
-
-    		<Text class="myTextWithMargin" width="70%" maxLines="5" text="Lorem ipsum dolor st amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat" />
-	</VBox>-->
-            </VBox>
-        </content>
-    
-
-        <content >
-
-          
-            <VBox   >
+            <VBox>
                 <Panel
                     width="100%"
                     height="auto"
-                    
-                    
                 >
-                   <Table
-                                    id="idCamposProp"
-                                    sticky="ColumnHeaders,HeaderToolbar"
-                                    items="{path: 'oModelParam>/', sorter: [{path: 'ID_PROP', descending: false}]}"
-                                    mode="None"
-                                    updateFinished="updateFinished"
-                                    growing="true"
-                                    growingThreshold="10"
-                                >
-                                    <headerToolbar>
-                                        <Toolbar>
-                                            <content>
-                                                <Title
-                                                    id="tUsers"
-                                                    text="Agregué los campos del modulo"
-                                                />
-                                                <ToolbarSpacer />
-                                                <Button
-                                                    class="sapUiSizeCompact"
-                                                    iconFirst="false"
-                                                    text="Añadir campo"
-                                                    type="Default"
-                                                    press="onNewFieldonCrear"
-                                                />
+                    <!-- 
+                    <Table
+                        id="idCamposProp"
+                        sticky="ColumnHeaders,HeaderToolbar"
+                        items="{path: 'oModelParamEntrada>/', sorter: [{path: 'ID_CAMPO_API', descending: false}]}"
+                        mode="None"
+                        updateFinished="updateFinished"
+                        growing="true"
+                        growingThreshold="10"
+                    >
+                        <headerToolbar>
+                            <Toolbar>
+                                <content>
+                                      <Title
+                                            id="TablaParamEntrada"
+                                            text="Parámetros de entrada"
+                                        />
+                                    <ToolbarSpacer />
+                                    <Button
+                                        class="sapUiSizeCompact"
+                                        iconFirst="false"
+                                        text="Añadir campo"
+                                        type="Default"
+                                        press="onNewFieldonCrear"
+                                    />
+                                </content>
+                            </Toolbar>
+                        </headerToolbar>
+                        <columns >
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true"
+                                width="350px"
+                            >
+                                <Text text="Nombre" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true"
+                                width="350px"
+                            >
+                                <Text text="Tipo" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true"
+                               width="350px"
+                            >
+                                <Text text="Descripción" />
+                            </Column>
+
+                          
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Input
+                                        value="{oModelParamEntrada>NOMBRE_PARAM}"
+                                        editable="{oModelParamEntrada>editable}"
+                                        width="300px"
+                                    />
+
+                                    <HBox justifyContent="Start" width="300px">
+                                        <Select
+                                            forceSelection="false"
+                                            selectedKey="aaa"
+                                            width="300px"
+                                            items="{
+                            path: 'oModelTipoParametro>/',
+                            sorter: { path: 'id' }
+                        }"
+                                        >
+                                            <core:Item
+                                                key="{ID_PROP}"
+                                                text="{oModelTipoParametro>Atributo}"
+                                            />
+                                        </Select>
+                                    </HBox>
+
+                                    <Input
+                                        value="{oModelParam>ETIQUETA}"
+                                        editable="{oModelParam>editable}"
+                                        width="300px"
                                         
-                                            </content>
-                                        </Toolbar>
-                                    </headerToolbar>
-                                    <columns>
-                                        <Column
-                                            minScreenWidth="Tablet"
-                                            demandPopin="true"
-                                            width="150px"
-                                        >
-                                            <Text text="ID" />
-                                        </Column>
+                                    />
 
-                                        <Column
-                                            minScreenWidth="Tablet"
-                                            demandPopin="true"
-                                            width="200px"
-                                        >
-                                            <Text text="Nombre" />
-                                        </Column>
-
-                                            <Column
-                                            minScreenWidth="Tablet"
-                                            demandPopin="true"
-                                            width="200px"
-                                        >
-                                            <Text text="Descripción" />
-                                        </Column>
-
+                                  
                                     
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table> -->
 
-                                            <Column
-                                            minScreenWidth="Tablet"
-                                            demandPopin="true"
-                                            width="200px"
+                    <VBox height="30px" />
+                    <Table
+                        id="idParamSal"
+                        sticky="ColumnHeaders,HeaderToolbar"
+                        items="{path: 'oModelParamEntrada>/', sorter: [{path: 'ID_CAMPO_API', descending: false}]}"
+                        mode="None"
+                        updateFinished="updateFinished"
+                        growing="true"
+                        growingThreshold="10"
+                    >
+                        <headerToolbar>
+                            <Toolbar>
+                                <content>
+                                    <Title
+                                        id="TablaParamSalida"
+                                        text="Parámetros de salida"
+                                    />
+                                    <ToolbarSpacer />
+                                    <Button
+                                        class="sapUiSizeCompact"
+                                        iconFirst="false"
+                                        text="Añadir campo"
+                                        type="Default"
+                                        press="onNewFieldonCrear"
+                                    />
+                                </content>
+                            </Toolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true"
+                                width="350px"
+                            >
+                                <Text text="Nombre" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true"
+                                width="350px"
+                            >
+                                <Text text="Tipo" />
+                            </Column>
+
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true"
+                                width="350px"
+                            >
+                                <Text text="Descripción" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Input
+                                        value="{oModelParamEntrada>NOMBRE_PARAM}"
+                                        editable="{oModelParamEntrada>editable}"
+                                        width="300px"
+                                    />
+
+                                    <HBox
+                                        justifyContent="Start"
+                                        width="300px"
+                                    >
+                                        <Select
+                                            forceSelection="false"
+                                            selectedKey="aaa"
+                                            width="300px"
+                                            items="{
+                            path: 'oModelTipoParametro>/',
+                            sorter: { path: 'id' }
+                        }"
                                         >
-                                            <Text text="Plazo conservación dato" />
-                                        </Column>
+                                            <core:Item
+                                                key="{ID_PROP}"
+                                                text="{oModelTipoParametro>Atributo}"
+                                            />
+                                        </Select>
+                                    </HBox>
 
-                                        <Column
-                                            minScreenWidth="Tablet"
-                                            demandPopin="true"
-                                            width="60px"
-                                        >
-                                            <Text text="" />
-                                        </Column>
-
-                                        
-                                    </columns>
-                                    <items>
-                                        <ColumnListItem>
-                                            <cells>
-                                                <Input
-                                                    value="{oModelParam>ID_PROP}"
-                                                    editable="{oModelParam>editable}"
-                                                />
-                                                <Input
-                                                    value="{oModelParam>NOMBRE_CAMPO}"
-                                                    editable="{oModelParam>editable}"
-                                                />
-
-                                                   <Input
-                                                    value="{oModelParam>DESCRIP_CAMPO}"
-                                                    editable="{oModelParam>editable}"
-                                                />
-
-                                                 <Input
-                                                    value="{oModelParam>PLAZO_INDIVIDUAL}"
-                                                    editable="{oModelParam>editable}"
-                                                />
-                                                <HBox
-                                                    
-                                                    width= "10px"
-                                                >
-                                                    <Button
-                                                        icon="sap-icon://decline"
-                                                        press="onEliminarCampoNewProp"
-                                                        tooltip="Eliminar campo"
-                                                        type="Transparent"
-                                                    />
-
-                                    
-                                                
-                                                </HBox>
-                                            </cells>
-                                        </ColumnListItem>
-                                    </items>
-
-                                    
-                                </Table>
-
+                                    <Input
+                                        value="{oModelParam>ETIQUETA}"
+                                        editable="{oModelParam>editable}"
+                                        width="300px"
+                                    />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
                 </Panel>
             </VBox>
         </content>
@@ -237,8 +315,3 @@
         </endButton>
     </Dialog>
 </core:FragmentDefinition>
-
-
-
-
-

@@ -1,0 +1,33 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+>
+    <Dialog
+        title="Mensaje de información"
+        type='Message'
+        contentWidth="100px"
+        contentHeight="60px"
+        class="sapUiNoContentPadding"
+    >
+        <content>
+        <HBox justifyContent="Center" >
+            <Text  text=" ¿ Desea añadir conexión API ?" textAlign="Center" class="MessageAPI" />               
+        </HBox>
+        </content>
+        <beginButton>
+
+            <Button
+                text="Continuar con API"
+                type="Emphasized"
+                press="onGoConexiones"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                text="Sólo crear sistema"
+                press=""
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition> 

@@ -48,10 +48,15 @@
                                     liveChange="liveChange"
                                 />
                             </form:SimpleForm>
+                                <HBox justifyContent="End"  >
+                               <Button visible="false" class="sapUiSizeCompact" tooltip="Continuar"  text="Continuar"  type="Emphasized" press="onNextStep"/>
+                                
+                            </HBox>
+             
                         </WizardStep>
                         <WizardStep
-                            id="ProductInfoStep"
-                            validated="true"
+                            id="CredencialesWizard"
+                            validated="false"
                             title="Credenciales"
                         >
                             <MessageStrip
@@ -108,153 +113,14 @@
                                     width="100%"
                                     liveChange="liveChange"
                                 />
-                            </form:SimpleForm>
-                        </WizardStep>
-                        <WizardStep
-                            id="OptionalInfoStep"
-                            validated="true"
-                            activate="optionalStepActivation"
-                            title="API"
-                        >
-                            <MessageStrip
-                                class="sapUiSmallMarginBottom"
-                                text="En caso de crear una API ingrese los campos obligatorios de la conexión"
-                                showIcon="true"
-                            />
-
-                            <form:SimpleForm
-                                editable="true"
-                                layout="ResponsiveGridLayout"
-                            >
-                          
-                                <Label text="Nombre conexión" />
-                                <Input
-                                    id="name_conexion"
-                                    width="100%"
-                                    liveChange="liveChange"
-                                />
-                                <Label text="Método" />
-                                <Select
-                                    id="name_metodo"
-                                    forceSelection="true"
-                                    width="100%"
-                                >
-                                    <core:Item
-                                        key=""
-                                        text=""
-                                    />
-                                    <core:Item
-                                        key="GET"
-                                        text="GET"
-                                    />
-                                    <core:Item
-                                        key="POST"
-                                        text="POST"
-                                    />
-                                    <core:Item
-                                        key="PUT"
-                                        text="PUT"
-                                    />
-                                    <core:Item
-                                        key="DELETE"
-                                        text="DELETE"
-                                    />
-                                </Select>
-                                <Label text="Path/Endpoint" />
-                                <Input
-                                    id="name_path"
-                                    width="100%"
-                                    liveChange="liveChange"
-                                />
-                                <Label text="Tipo de Conexión" />
-                                <Select
-                                    id="name_tipo"
-                                    forceSelection="true"
-                                    width="100%"
-                                >
-                                    <core:Item
-                                        key=""
-                                        text=""
-                                    />
-                                    <core:Item
-                                        key="API"
-                                        text="API"
-                                    />
-                                    <core:Item
-                                        key="ODATA"
-                                        text="ODATA"
-                                    />
-                                </Select>
-                                <Label text="Host" />
-                                <Input
-                                    id="name_host"
-                                    width="100%"
-                                    liveChange="liveChange"
-                                />
-                                <Label text="Estado" />
-                                <Select
-                                    id="name_estado"
-                                    forceSelection="true"
-                                    width="100%"
-                                >
-                                    <core:Item
-                                        key=""
-                                        text=""
-                                    />
-                                    <core:Item
-                                        key="Activo"
-                                        text="Activo"
-                                    />
-                                    <core:Item
-                                        key="Inactivo"
-                                        text="Inactivo"
-                                    />
-                                </Select>
-                                <Label text="Token" />
-                                <Input
-                                    id="name_token"
-                                    width="100%"
-                                    liveChange="liveChange"
-                                />
-                                <Label text="Parámetros de entrada" />
-                                <Input
-                                    id="name_param"
-                                    width="100%"
-                                    liveChange="liveChange"
-                                />
-                                
-
-                                <Label text="Parámetros de salida" />
-                                
-
-                                 <HBox justifyContent="Start"  >
-                                <Button class="sapUiSizeCompact" tooltip="Guardar" iconFirst="false" text="Agregar parámetros de entrada" icon="sap-icon://create-form" type="Emphasized" press="onCreateParam"/>
-                        
-                                
-                            </HBox>
-                                <Label text="Descripción" />
-                                <TextArea
-                                    id="name_descrip"
-                                    rows="4"
-                                    width="100%"
-                                    liveChange="liveChange"
-                                />
-                            
+                                                            
                             </form:SimpleForm>
                             <HBox justifyContent="End"  >
-                                <Button class="sapUiSizeCompact" tooltip="Guardar" iconFirst="false" text="Guardar conexión actual" icon="sap-icon://create-form" type="Emphasized" press="onCreate"/>
-                        
-                                
-                            </HBox>
-                            <HBox justifyContent="End"  >
-                               <Button class="sapUiSizeCompact" tooltip="Agregar nueva conexión" iconFirst="false" text="Agregar nueva conexión" icon="sap-icon://synchronize" type="Emphasized" press="onRefresh"/>
-                                
-                            </HBox>
-                            <HBox justifyContent="End"  >
-                               <Button class="sapUiSizeCompact" tooltip="Continuar sin ingresar conexión" iconFirst="false" text="Continuar sin ingresar conexión" icon="sap-icon://synchronize" type="Emphasized" press="onRefresh"/>
+                               <Button  class="sapUiSizeCompact" tooltip="Crear Sistema"  text="Crear Sistema"  type="Emphasized" press="onDialogQuestion"/>
                                 
                             </HBox>
                         </WizardStep>
+                     
                        
                     </Wizard>
                 </content>

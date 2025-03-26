@@ -6,8 +6,17 @@
     width: 200px;       /* Ancho del texto */
 }
 
+.myTextWithMarginRight {
+    margin-right: 7px;  /* Ajusta el valor según lo necesites */
+    width: 200px;       /* Ancho del texto */
+}
+
 .políticasLabel {
     margin-top: 9px; /* Ajusta el valor según el espacio que necesites */
+}
+
+.MessageAPI {
+    margin-top: 18px; /* Ajusta el valor según el espacio que necesites */
 }
 
 .plazoconserv {

@@ -12,36 +12,18 @@
                 </VBox>
                 <VBox>
                     <Label text="Nombre del Sistema" />
-                    <Input id="ipNameEdit" width="100%" value="{oModelCompanySystem>companySystemName}" />
+                    <Input  editable="true" d="ipNameEdit" width="100%" value="{oModelCompanySystem>companySystemName}" />
                     
-                    <Label text="Método" />
-                    <Select id="slMethodEdit" forceSelection="true" width="100%" selectedKey="{oModelCompanySystem>method}">
-                        <core:Item key="GET" text="GET"/>
-                        <core:Item key="POST" text="POST"/>
-                        <core:Item key="PUT" text="PUT"/>
-                        <core:Item key="DELETE" text="DELETE"/>
-                    </Select>
+                    <Label text="Descripción" />
+                    <Input editable="true" id="ipDescipcion" width="100%" value="{oModelCompanySystem>Descripcion}" />
                     
-                    <Label text="EndPoint" />
-                    <Input id="ipEndPointEdit" width="100%" value="{oModelCompanySystem>endPoint}" />
-                    
-                    <Label text="Tipo de Conexión" />
-                    <Select id="ipTypeConnectionEdit" forceSelection="true" width="100%" selectedKey="{oModelCompanySystem>connectionType}">
-                        <core:Item key="API" text="API"/>
-                        <core:Item key="ODATA" text="ODATA"/>
-                    </Select>
+                   
                     
                     <Label text="Estado" />
                     <Select id="slStatusEdit" forceSelection="true" width="100%" selectedKey="{path: 'oModelCompanySystem>status', formatter: '.formatterEstado'}" state="{path: 'oModelCompanySystem>status', formatter: '.formatterState'}" inverted="true">
                         <core:Item key="1" text="Activo"/>
                         <core:Item key="2" text="Inactivo"/>
                     </Select>
-                    
-                    <Label text="Token" />
-                    <Input id="ipTokenEdit" width="100%" value="{oModelCompanySystem>token}" />
-                    
-                    <Label text="Descripción" />
-                    <TextArea id="ipDescriptionEdit" rows="4" width="100%" value="{oModelCompanySystem>description}" />
 
                     <layoutData>
                         <l:GridData span="XL12 L12 M12 S12"/>
@@ -50,7 +32,7 @@
             </l:Grid>
         </content>
         <beginButton>
-            <Button text="Guardar Cambios" press=".onSaveEdit"/>
+            <Button text="Guardar" press=".onSaveEdit" type="Emphasized"/>
         </beginButton>
         <endButton>
             <Button text="Cancelar" press=".onCloseEdit"/>

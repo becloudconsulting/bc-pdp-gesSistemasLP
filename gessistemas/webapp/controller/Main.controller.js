@@ -379,7 +379,7 @@ sap.ui.define([
             
                 this.oViewEditCompanySystem.open();
             },
-
+            
             onSaveEdit: function () {
                 var name = sap.ui.getCore().byId("ipNameEdit").getValue().trim();
                 var method = sap.ui.getCore().byId("slMethodEdit").getSelectedKey();
@@ -442,7 +442,7 @@ sap.ui.define([
                 }.bind(this));
 
                 var companySystemName = oEvent.getSource().getBindingContext("oModelCompanySystem").getObject().companySystemName;
-                sap.ui.getCore().byId("dlgInfoCompanySystem").setTitle("Sistema seleccionado: " + companySystemName);
+                sap.ui.getCore().byId("dlgInfoCompanySystem").setTitle(companySystemName);
 
                 var sPath = oEvent.getSource().getBindingContext("oModelCompanySystem").sPath;
                 this.oViewInfoCompanySystem.bindElement({
@@ -670,8 +670,10 @@ sap.ui.define([
 
             updateFinished: function (oEvent) {
                 var total = oEvent.getParameter("total")
-                this.getView().byId("tProducts").setText("Registros (" + total + ")");
+                this.getView().byId("tProducts").setText("Registros (" + total + ") ");
             },
+
+
 
             //USADO
             getCompanySystem: function () {
@@ -683,13 +685,12 @@ sap.ui.define([
                                 {
                                     "id": "1",
                                     "companySystemName": "Tech Solutions Inc.",
-                                    "method": "GET",
-                                    "endPoint": "/api/v1/users",
+                                    "Descripcion": "Descripcion abcd",
+                                    "Servicios": "3",
                                     "creationDate": "Fri Jan 17 2025 00:00:00 GMT-0400",
-                                    "connectionType": "API",
+                                    "Creador": "Admin05",
                                     "status": "1",
-                                    "description": "Servicio para obtener información de usuarios.",
-                                    "token": "abc123xyz"
+    
                                 },
                                 {
                                     "id": "2",
@@ -756,7 +757,7 @@ sap.ui.define([
                         }) */
                     }.bind(this));
             },
-
+            
             getCompanySystemRequest: function () {
                 return new Promise(
                     function resolver(resolve) {
@@ -1112,12 +1113,25 @@ sap.ui.define([
                 var isSecondTableVisible = oModel.getProperty("/isSecondTableVisible");
             
                 oModel.setProperty("/isSecondTableVisible", !isSecondTableVisible);
+            },
+            onOpenUserData: function (oEvent) {
+                var oButton = oEvent.getSource();
+                var oContext = oButton.getBindingContext("oModelCompanySystem");
+                var oData = oContext.getObject();
+            
+                // Guardar el título en un modelo global
+                var oModel = this.getOwnerComponent().getModel("globalModel");
+                oModel.setProperty("/pageTitle", "Datos de " + oData.companySystemName);
+            
+                // Navegar a la vista de usuario
+                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("RouteUserData");
             }
 
 
 
 
-            //FUNCIONES PARA AGREGAR CAMPOS DINÁMICOS AL INGRESAR UNA NUEVA API
+            
 
             
     

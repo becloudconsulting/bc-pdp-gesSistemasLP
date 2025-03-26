@@ -11,20 +11,15 @@
                     </layoutData>
                 </VBox>
                 <VBox>
-                    <Label text="Motivo"/>
+                    <Label text="Nombre sistema"/>
                     <Input enabled="false" width="100%" value="{oModelCompanySystem>companySystemName}"/>
-                    <Label text="Sistema asociado a la denuncia" />
-                    <Input enabled="false" width="100%" value="{oModelCompanySystem>method}"/>
-                    <Label text="API asociada a la denuncia" />
-                    <Input enabled="false" width="100%" value="{oModelCompanySystem>endPoint}"/>
-                    <Label text="Tipo Conexión" />
-                    <Input enabled="false" width="100%" value="{oModelCompanySystem>connectionType}"/>
-                    <Label text="Estado"/>
-                    <Input enabled="false" width="100%" value="{path: 'oModelCompanySystem>status', formatter: '.formatterEstado'}" state="{path: 'oModelCompanySystem>status', formatter: '.formatterState'}" inverted="true"/>
                     <Label text="Descripción" />
-                    <TextArea enabled="false" rows="4" value="{oModelCompanySystem>description}" width="100%"/>
-                    <Label text="Token" />
-                    <TextArea enabled="false" rows="4" value="{oModelCompanySystem>token}" width="100%"/>
+                    <Input enabled="false" width="100%" value="{oModelCompanySystem>Descripcion}"/>
+                    <Label text="Cantidad de servicios" />
+                    <Input enabled="false" width="100%" value="{oModelCompanySystem>Servicios}"/>
+                    <Label text="Creado por:" />
+                    <Input enabled="false" width="100%" value="{oModelCompanySystem>Creador}"/>
+
 
                     <layoutData>
                         <l:GridData span="XL12 L12 M12 S12"/>
