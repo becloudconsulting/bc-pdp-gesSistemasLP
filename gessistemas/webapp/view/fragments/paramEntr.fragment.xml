@@ -1,104 +1,16 @@
-<core:FragmentDefinition
+ <core:FragmentDefinition
     xmlns="sap.m"
+    xmlns:table="sap.ui.table"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
     xmlns:fo="sap.ui.layout.form"
     xmlns:k="sap.m"
     xmlns:dnd="sap.ui.core.dnd"
     xmlns:u="sap.ui.unified"
+    controllerName="com.becloud.pdp.gessistemas.controller.fragments_controller.paramEntr"
 >
-    <k:Page
-        showHeader="false"
-        enableScrolling="false"
-    >
-        <k:content>
-            <TreeTable
-                id="TreeTable"
-                rows="{path:'/catalog/clothing', parameters: {arrayNames:['categories']}}"
-                selectionMode="MultiToggle"
-                enableSelectAll="false"
-                ariaLabelledBy="title"
-            >
-                <extension>
-                    <k:OverflowToolbar style="Clear">
-                        <k:Title
-                            id="title"
-                            text="Clothing"
-                        />
-                        <k:Button
-                            id="cut"
-                            text="Cut"
-                            icon="sap-icon://scissors"
-                            press="onCut"
-                        />
-                        <k:Button
-                            id="paste"
-                            text="Paste"
-                            icon="sap-icon://paste"
-                            press="onPaste"
-                            enabled="false"
-                        />
-                        <k:ToolbarSpacer />
-                        <k:Button
-                            text="Collapse all"
-                            press="onCollapseAll"
-                        />
-                        <k:Button
-                            text="Expand first level"
-                            press="onExpandFirstLevel"
-                        />
-                    </k:OverflowToolbar>
-                </extension>
-                <dragDropConfig>
-                    <dnd:DragDropInfo
-                        sourceAggregation="rows"
-                        targetAggregation="rows"
-                        dragStart="onDragStart"
-                        drop="onDrop"
-                    />
-                </dragDropConfig>
-                <columns>
-                    <Column width="13rem">
-                        <k:Label text="Categories" />
-                        <template>
-                            <k:Text
-                                text="{name}"
-                                wrapping="false"
-                            />
-                        </template>
-                    </Column>
-                    <Column width="9rem">
-                        <k:Label text="Price" />
-                        <template>
-                            <u:Currency
-                                value="{amount}"
-                                currency="{currency}"
-                            />
-                        </template>
-                    </Column>
-                    <Column>
-                        <k:Label text="Size" />
-                        <template>
-                            <k:Select
-                                items="{path: '/sizes', templateShareable: true}"
-                                selectedKey="{size}"
-                                visible="{= !!${size}}"
-                                forceSelection="false"
-                            >
-                                <core:Item
-                                    key="{key}"
-                                    text="{value}"
-                                />
-                            </k:Select>
-                        </template>
-                    </Column>
-                </columns>
-            </TreeTable>
-        </k:content>
-    </k:Page>
-
     <Dialog
-        title="Parámetros"
+        title="Parámetros de entrada y salida"
         type='Message'
         contentWidth="1200px"
         horizontalScrolling="false"
@@ -110,192 +22,173 @@
                     width="100%"
                     height="auto"
                 >
-                    <!-- 
-                    <Table
-                        id="idCamposProp"
-                        sticky="ColumnHeaders,HeaderToolbar"
-                        items="{path: 'oModelParamEntrada>/', sorter: [{path: 'ID_CAMPO_API', descending: false}]}"
-                        mode="None"
-                        updateFinished="updateFinished"
-                        growing="true"
-                        growingThreshold="10"
-                    >
-                        <headerToolbar>
-                            <Toolbar>
-                                <content>
-                                      <Title
-                                            id="TablaParamEntrada"
-                                            text="Parámetros de entrada"
-                                        />
-                                    <ToolbarSpacer />
-                                    <Button
-                                        class="sapUiSizeCompact"
-                                        iconFirst="false"
-                                        text="Añadir campo"
-                                        type="Default"
-                                        press="onNewFieldonCrear"
-                                    />
-                                </content>
-                            </Toolbar>
-                        </headerToolbar>
-                        <columns >
-                            <Column
-                                minScreenWidth="Tablet"
-                                demandPopin="true"
-                                width="350px"
-                            >
-                                <Text text="Nombre" />
-                            </Column>
+                    <table:TreeTable
+    id="TreeTable"
+    rows="{path: 'oModelCatalog>/catalog/inputs'}"
+    selectionBehavior="RowOnly"
+    enableSelectAll="false"
+    ariaLabelledBy="title"
+>
+    <table:extension>
+        <k:OverflowToolbar style="Clear" >
+            <k:Title
+                id="title"
+                text="Inputs de entrada"
+                textAlign="Begin"
+            />
+            <k:Button
+                text="Agregar Nivel Principal"
+                icon="sap-icon://add"
+                press="onAddMainLevel" 
+                class="MarginLeftAgregarNivelPrincipal"
+            />
+        </k:OverflowToolbar>
+    </table:extension>
 
-                            <Column
-                                minScreenWidth="Tablet"
-                                demandPopin="true"
-                                width="350px"
-                            >
-                                <Text text="Tipo" />
-                            </Column>
+    <table:columns>
+        <!-- Columna Nombre -->
+        <table:Column width="13rem">
+            <k:Label text="Nombre" />
+            <table:template>
+                <Input value="{oModelCatalog>name}" />
+            </table:template>
+        </table:Column>
 
-                            <Column
-                                minScreenWidth="Tablet"
-                                demandPopin="true"
-                               width="350px"
-                            >
-                                <Text text="Descripción" />
-                            </Column>
+        <!-- Columna Tipo (Select) -->
+        <table:Column width="9rem">
+            <k:Label text="Tipo" />
+            <table:template>
+                <k:Select
+                    items="{path: 'oModelCatalog>/types', templateShareable: true}"
+                    selectedKey="{oModelCatalog>type}"
+                    forceSelection="false"
+                    change="onSelectTypeChange" 
+                >
+                    <core:Item key="{oModelCatalog>key}" text="{oModelCatalog>value}" />
+                </k:Select>
+            </table:template>
+        </table:Column>
 
-                          
-                        </columns>
-                        <items>
-                            <ColumnListItem>
-                                <cells>
-                                    <Input
-                                        value="{oModelParamEntrada>NOMBRE_PARAM}"
-                                        editable="{oModelParamEntrada>editable}"
-                                        width="300px"
-                                    />
+        <!-- Columna Descripción -->
+        <table:Column>
+            <k:Label text="Descripción" />
+            <table:template>
+                <Input
+                    value="{oModelCatalog>description}"
+                    width="100%"
+                />
+            </table:template>
+        </table:Column>
 
-                                    <HBox justifyContent="Start" width="300px">
-                                        <Select
-                                            forceSelection="false"
-                                            selectedKey="aaa"
-                                            width="300px"
-                                            items="{
-                            path: 'oModelTipoParametro>/',
-                            sorter: { path: 'id' }
-                        }"
-                                        >
-                                            <core:Item
-                                                key="{ID_PROP}"
-                                                text="{oModelTipoParametro>Atributo}"
-                                            />
-                                        </Select>
-                                    </HBox>
+        <!-- Columna Acción (Agregar subnivel y Eliminar) -->
+        <table:Column>
+            <k:Label text="Acción" />
+            <table:template>
+                <HBox>
+                    <!-- Botón Agregar Subnivel, solo visible si el tipo es JSON -->
+                    <Button
+                        icon="sap-icon://add"
+                        text="Agregar Subnivel"
+                        press="onAddSublevel"
+                        type="Transparent"
+                        visible="{= ${oModelCatalog>type} === 'JSON' }" 
+                    />
+                    <Button
+                        icon="sap-icon://delete"
+                        press="onDeleteSublevel"
+                        type="Transparent"
+                    />
+                </HBox>
+            </table:template>
+        </table:Column>
+    </table:columns>
+</table:TreeTable>
 
-                                    <Input
-                                        value="{oModelParam>ETIQUETA}"
-                                        editable="{oModelParam>editable}"
-                                        width="300px"
-                                        
-                                    />
 
-                                  
-                                    
-                                </cells>
-                            </ColumnListItem>
-                        </items>
-                    </Table> -->
+<table:TreeTable
+    id="TreeTableOutput"
+    rows="{path: 'oModelCatalogOutput>/catalog/outputs'}"
+    selectionBehavior="RowOnly"
+    enableSelectAll="false"
+    ariaLabelledBy="titleOutput"
+>
+    <table:extension>
+        <k:OverflowToolbar style="Clear" >
+            <k:Title
+                id="titleOutput"
+                text="Inputs de salida"
+                textAlign="Begin"
+            />
+            <k:Button
+                text="Agregar Nivel Principal"
+                icon="sap-icon://add"
+                press="onAddMainLevelOutput" 
+                class="MarginLeftAgregarNivelPrincipal"
+            />
+        </k:OverflowToolbar>
+    </table:extension>
 
-                    <VBox height="30px" />
-                    <Table
-                        id="idParamSal"
-                        sticky="ColumnHeaders,HeaderToolbar"
-                        items="{path: 'oModelParamEntrada>/', sorter: [{path: 'ID_CAMPO_API', descending: false}]}"
-                        mode="None"
-                        updateFinished="updateFinished"
-                        growing="true"
-                        growingThreshold="10"
-                    >
-                        <headerToolbar>
-                            <Toolbar>
-                                <content>
-                                    <Title
-                                        id="TablaParamSalida"
-                                        text="Parámetros de salida"
-                                    />
-                                    <ToolbarSpacer />
-                                    <Button
-                                        class="sapUiSizeCompact"
-                                        iconFirst="false"
-                                        text="Añadir campo"
-                                        type="Default"
-                                        press="onNewFieldonCrear"
-                                    />
-                                </content>
-                            </Toolbar>
-                        </headerToolbar>
-                        <columns>
-                            <Column
-                                minScreenWidth="Tablet"
-                                demandPopin="true"
-                                width="350px"
-                            >
-                                <Text text="Nombre" />
-                            </Column>
+    <table:columns>
+        <!-- Columna Nombre -->
+        <table:Column width="13rem">
+            <k:Label text="Nombre" />
+            <table:template>
+                <Input value="{oModelCatalogOutput>name}" />
+            </table:template>
+        </table:Column>
 
-                            <Column
-                                minScreenWidth="Tablet"
-                                demandPopin="true"
-                                width="350px"
-                            >
-                                <Text text="Tipo" />
-                            </Column>
+        <!-- Columna Tipo (Select) -->
+        <table:Column width="9rem">
+            <k:Label text="Tipo" />
+            <table:template>
+                <k:Select
+                    items="{path: 'oModelCatalogOutput>/types', templateShareable: true}"
+                    selectedKey="{oModelCatalogOutput>type}"
+                    forceSelection="false"
+                    change="onSelectTypeChangeOutput" 
+                >
+                    <core:Item key="{oModelCatalogOutput>key}" text="{oModelCatalogOutput>value}" />
+                </k:Select>
+            </table:template>
+        </table:Column>
 
-                            <Column
-                                minScreenWidth="Tablet"
-                                demandPopin="true"
-                                width="350px"
-                            >
-                                <Text text="Descripción" />
-                            </Column>
-                        </columns>
-                        <items>
-                            <ColumnListItem>
-                                <cells>
-                                    <Input
-                                        value="{oModelParamEntrada>NOMBRE_PARAM}"
-                                        editable="{oModelParamEntrada>editable}"
-                                        width="300px"
-                                    />
+        <!-- Columna Descripción -->
+        <table:Column>
+            <k:Label text="Descripción" />
+            <table:template>
+                <Input
+                    value="{oModelCatalogOutput>description}"
+                    width="100%"
+                />
+            </table:template>
+        </table:Column>
 
-                                    <HBox
-                                        justifyContent="Start"
-                                        width="300px"
-                                    >
-                                        <Select
-                                            forceSelection="false"
-                                            selectedKey="aaa"
-                                            width="300px"
-                                            items="{
-                            path: 'oModelTipoParametro>/',
-                            sorter: { path: 'id' }
-                        }"
-                                        >
-                                            <core:Item
-                                                key="{ID_PROP}"
-                                                text="{oModelTipoParametro>Atributo}"
-                                            />
-                                        </Select>
-                                    </HBox>
+        <!-- Columna Acción (Agregar subnivel y Eliminar) -->
+        <table:Column>
+            <k:Label text="Acción" />
+            <table:template>
+                <HBox>
+                    <!-- Botón Agregar Subnivel, solo visible si el tipo es JSON -->
+                    <Button
+                        icon="sap-icon://add"
+                        text="Agregar Subnivel"
+                        press="onAddSublevelOutput"
+                        type="Transparent"
+                        visible="{= ${oModelCatalogOutput>type} === 'JSON' }" 
+                    />
+                    <Button
+                        icon="sap-icon://delete"
+                        press="onDeleteSublevelOutput"
+                        type="Transparent"
+                    />
+                </HBox>
+            </table:template>
+        </table:Column>
+    </table:columns>
+</table:TreeTable>
 
-                                    <Input
-                                        value="{oModelParam>ETIQUETA}"
-                                        editable="{oModelParam>editable}"
-                                        width="300px"
-                                    />
-                                </cells>
-                            </ColumnListItem>
-                        </items>
-                    </Table>
+                   
+
                 </Panel>
             </VBox>
         </content>
@@ -310,8 +203,10 @@
         <endButton>
             <Button
                 text="Cancelar"
-                press="onCloseCreate"
+                press="onCloseParam"
             />
         </endButton>
     </Dialog>
-</core:FragmentDefinition>
+</core:FragmentDefinition> 
+
+

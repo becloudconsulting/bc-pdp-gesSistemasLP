@@ -1,0 +1,74 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog id= "idDetailFragment" title="Nueva conexión" type='Message' contentWidth="600px" class="sapUiNoContentPadding">
+        <content>
+            <l:Grid vSpacing="1" hSpacing="1" width="100%" class="sapUiSmallMargin">
+                <VBox>
+                    <Title text="Información de conexión"/>
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12"/>
+                    </layoutData>
+                </VBox>
+                <VBox>
+                    <Label text="Nombre conexión" />
+                    <!-- El campo de "Nombre conexión" permanece editable -->
+                    <Input id="inputNameConexionDetail" value ="{oModelUsersData>API_name}" width="100%" liveChange="liveChange" editable="false" />
+                    
+                    <Label text="Descripción" />
+                    <!-- El campo de "Descripción" es solo lectura (editable=false) -->
+                    <TextArea id="textareaDescripcionConexionDetail" value="{oModelUsersData>Descripcion}" rows="4" width="100%" liveChange="liveChange" editable="false"/>
+                    
+                    <Label text="Método" />
+                    <!-- El campo de "Método" es solo lectura (editable=false) -->
+                    <Select id="selectMetodoConexionDetail"    forceSelection="true" width="100%" editable="false" selectedKey="{oModelUsersData>Metodo}">
+                        
+                        <core:Item key="GET" text="GET"/>
+                        <core:Item key="POST" text="POST"/>
+                        <core:Item key="PUT" text="PUT"/>
+                        <core:Item key="DELETE" text="DELETE"/>
+                    </Select>
+                    
+                    <Label text="Path/Endpoint" />
+                    <!-- El campo de "Path/Endpoint" es solo lectura (editable=false) -->
+                    <Input value="{oModelUsersData>Path}"  id="inputPathEndpointConexionDetail" width="100%" liveChange="liveChange" editable="false"/>
+                    
+                    <Label text="Tipo de Conexión" />
+                    <!-- El campo de "Tipo de Conexión" es solo lectura (editable=false) -->
+                    <Select id="selectTipoConexionDetail" forceSelection="true" width="100%" editable="false" selectedKey="{oModelUsersData>Tipo_conexion}">
+                        <core:Item key="API" text="API"/>
+                        <core:Item key="API" text="API"/>
+                        <core:Item key="ODATA" text="ODATA"/>
+                    </Select>
+                    
+                    <Label text="Host" />
+                    <!-- El campo de "Host" es solo lectura (editable=false) -->
+                    <Input id="inputHostConexionDetail" value="{oModelUsersData>Host}" width="100%" liveChange="liveChange" editable="false"/>
+                    
+                    <Label text="Estado" />
+                    <!-- El campo de "Estado" es solo lectura (editable=false) -->
+                    <Select id="selectEstadoConexionDetail" forceSelection="true" width="100%" selectedKey="{oModelUsersData>status}" editable="false">
+                        <core:Item key="" text=""/>
+                        <core:Item key="Activo" text="Activo"/>
+                        <core:Item key="Inactivo" text="Inactivo"/>
+                    </Select>
+                                 
+                    <HBox class ='políticasLabel'>
+                        
+                        <Button text="Ver parámetros de entrada y salida" press="onReadParam" />
+                    </HBox>
+
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12"/>
+                    </layoutData>
+                </VBox>
+            </l:Grid>
+        </content>
+        <beginButton>
+            <Button text="Guardar" type="Emphasized" press="onSaveCreate" visible="false"/>
+        </beginButton>
+        <endButton>
+            <Button text="Cerrar" press="onCloseDetailsAPI"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

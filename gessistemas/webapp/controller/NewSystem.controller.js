@@ -17,6 +17,7 @@ sap.ui.define([
     return Controller.extend("com.becloud.pdp.gessistemas.controller.NewSystem", {
         onInit: function () {
             this.CreatemodelParam();
+            this.indexStep = 0;
 
         },
         CreatemodelParam: function () {
@@ -66,7 +67,55 @@ sap.ui.define([
             // Generar el formulario dinámico en el Paso 3
             this.optionalStepActivation();
         },
- 
+
+        onSiguiente2: function () {
+            var oWizard = this.byId("CreateProductWizard"); // Obtener el control del Wizard
+            var oNextButton = this.byId("nextButton"); // Obtener el botón "Siguiente"
+
+            // Incrementar la propiedad indexStep
+            this.indexStep++;
+
+            // Avanzar al siguiente paso
+            oWizard.nextStep();
+
+            // Imprimir el valor de indexStep para ver en qué paso estamos
+            console.log("Índice del paso actual: " + this.indexStep);
+
+            // Verificar si es el último paso (cuando indexStep sea 3)
+            if (this.indexStep >= 1) {
+                // Cambiar el texto del botón a "Guardar"
+                oNextButton.setText("Crear sistema");
+
+                // Asociar la función para guardar (puedes asociar el onPress de este botón a un método de guardar)
+                oNextButton.attachPress(this.onGuardar, this);
+            } else {
+                // Si no es el último paso, mantenemos el texto como "Siguiente"
+                oNextButton.setText("Siguiente");
+            }
+        },
+        onGuardar: function () {
+            var that = this; // Referencia al controlador
+        
+            sap.m.MessageBox.warning("¿Desea agregar una API al sistema?", {
+                title: "Confirmación",
+                actions: [
+                    "Si, agregar API",
+                    "Sólo crear sistema"
+                ],
+                emphasizedAction: "Si, agregar API",
+                styleClass: "sapUiSizeCompact", // Para mejorar en escritorio
+                contentWidth: "25rem", // Ajusta el ancho del MessageBox
+                onClose: function (sAction) {
+                    if (sAction === "Si, agregar API") {
+                        that.getOwnerComponent().getRouter().navTo("RouteListUserData");
+                    } else if (sAction === "Sólo crear sistema") {
+                        that.getOwnerComponent().getRouter().navTo("RouteMain"); // Cambia "RouteMain" por la ruta que necesites
+                    }
+                }
+            });
+        }
+        ,
+
         onDialogQuestion: function(){
 
             // Comprobamos si el fragmento ya está creado antes de abrirlo
@@ -87,7 +136,31 @@ sap.ui.define([
 
         onSaveSistema: function() {
             
+        },
+
+        onCloseDialogConfirmSistema: function () {
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("RouteMain");
+        },
+        onCancelCreacionSistema: function () {
+            var that = this; // Guardamos la referencia al controlador
+        
+            sap.m.MessageBox.warning("¿Estás seguro de que deseas cancelar la creación del sistema?", {
+                title: "Confirmación",
+                actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
+                emphasizedAction: sap.m.MessageBox.Action.OK,
+                onClose: function (sAction) {
+                    if (sAction === sap.m.MessageBox.Action.OK) {
+                        // Si el usuario presiona OK, lo llevamos a la vista "VistaAceptar"
+                        that.getOwnerComponent().getRouter().navTo("RouteMain");
+                    } else if (sAction === sap.m.MessageBox.Action.CANCEL) {
+                        // Si el usuario presiona CANCEL, lo llevamos a la vista "VistaCancelar"
+                        this.MessageBox.onClose();
+                    }
+                }
+            });
         }
+        
         
 
         

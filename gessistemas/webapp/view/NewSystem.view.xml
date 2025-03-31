@@ -21,8 +21,8 @@
                     >
                         <WizardStep
                             id="ProductTypeStep"
-                            title="Información del sistema"
-                            validated="true"
+                            title="Crear sistema: Información del sistema"
+                            validated="false"
                         >
                             <MessageStrip
                                 class="sapUiSmallMarginBottom"
@@ -57,7 +57,7 @@
                         <WizardStep
                             id="CredencialesWizard"
                             validated="false"
-                            title="Credenciales"
+                            title="Crear sistema: Credenciales"
                         >
                             <MessageStrip
                                 class="sapUiSmallMarginBottom"
@@ -115,162 +115,31 @@
                                 />
                                                             
                             </form:SimpleForm>
-                            <HBox justifyContent="End"  >
-                               <Button  class="sapUiSizeCompact" tooltip="Crear Sistema"  text="Crear Sistema"  type="Emphasized" press="onDialogQuestion"/>
-                                
-                            </HBox>
+                      
                         </WizardStep>
                      
                        
                     </Wizard>
                 </content>
-                <footer>
+                 <footer>
                     <OverflowToolbar>
                         <ToolbarSpacer />
+
+                       <Button
+                                                        id="nextButton"
+                                                        text="Siguiente"
+                                                        press="onSiguiente2"
+                                                        tooltip="Siguiente paso"
+                                                        type="Emphasized"
+                                                    />
+                                           
                         <Button
-                            text="Cancel"
-                            press="handleWizardCancel"
+                            text="Cancelar"
+                            press="onCancelCreacionSistema"
+                            tooltip="Cancelar"
+
                         />
                     </OverflowToolbar>
-                </footer>
-            </Page>
-            <Page
-                id="wizardReviewPage"
-                showHeader="false"
-            >
-                <content>
-                    <form:SimpleForm
-                        title="1. Product Type"
-                        editable="false"
-                        layout="ResponsiveGridLayout"
-                    >
-                        <form:content>
-                            <Label text="Type" />
-                            <Text
-                                id="ProductTypeChosen"
-                                text="{/productType}"
-                            />
-                            <Link
-                                press="editStepOne"
-                                text="Edit"
-                            />
-                        </form:content>
-                    </form:SimpleForm>
-
-                    <form:SimpleForm
-                        title="2. Product Information"
-                        editable="false"
-                        layout="ResponsiveGridLayout"
-                    >
-                        <form:content>
-                            <Label text="Name" />
-                            <Text
-                                id="ProductNameChosen"
-                                text="{/productName}"
-                            />
-                            <Label text="Weight" />
-                            <Text
-                                id="ProductWeightChosen"
-                                text="{/productWeight}"
-                            />
-                            <Label text="Manufacturer" />
-                            <Text
-                                id="ProductManufacturerChosen"
-                                text="{/productManufacturer}"
-                            />
-                            <Label text="Description" />
-                            <Text
-                                id="ProductDescriptionChosen"
-                                text="{/productDescription}"
-                            />
-                            <Link
-                                press="editStepTwo"
-                                text="Edit"
-                            />
-                        </form:content>
-                    </form:SimpleForm>
-
-                    <form:SimpleForm
-                        title="3. Optional Information"
-                        editable="false"
-                        layout="ResponsiveGridLayout"
-                    >
-                        <form:content>
-                            <Label text="Some text" />
-                            <Text
-                                text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. "
-                            />
-                            <Label text="Manufacturing Date" />
-                            <Text
-                                id="ManufacturingDate"
-                                text="{/manufacturingDate}"
-                            />
-                            <Label text="Availability" />
-                            <Text
-                                id="AvailabilityChosen"
-                                text="{/availabilityType}"
-                            />
-                            <Label text="Size" />
-                            <HBox>
-                                <Text
-                                    id="Size"
-                                    text="{/size}"
-                                />
-                                <Text
-                                    id="Size2"
-                                    class="sapUiTinyMarginBegin"
-                                    text="{/measurement}"
-                                />
-                            </HBox>
-                            <Link
-                                press="editStepThree"
-                                text="Edit"
-                            />
-                        </form:content>
-                    </form:SimpleForm>
-
-                    <form:SimpleForm
-                        title="4. Pricing"
-                        editable="false"
-                        layout="ResponsiveGridLayout"
-                    >
-                        <form:content>
-                            <Label text="Price" />
-                            <Text
-                                id="ProductPriceChosen"
-                                text="{/productPrice}"
-                            />
-                            <Label text="Discount Group" />
-                            <Text
-                                id="DiscountGroupChosen"
-                                text="{/discountGroup}"
-                            />
-                            <Label text="VAT Included" />
-                            <Text
-                                id="ProductVATChosen"
-                                text="{/productVAT}"
-                            />
-                            <Link
-                                press="editStepFour"
-                                text="Edit"
-                            />
-                        </form:content>
-                    </form:SimpleForm>
-                </content>
-                <footer>
-                    <Bar>
-                        <contentRight>
-                            <Button
-                                text="Submit"
-                                press="handleWizardSubmit"
-                            />
-                            <Button
-                                text="Cancel"
-                                press="handleWizardCancel"
-                            />
-                        </contentRight>
-                    </Bar>
                 </footer>
             </Page>
         </pages>

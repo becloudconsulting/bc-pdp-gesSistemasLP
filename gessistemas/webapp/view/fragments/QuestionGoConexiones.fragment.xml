@@ -8,11 +8,12 @@
         type='Message'
         contentWidth="100px"
         contentHeight="60px"
-        class="sapUiNoContentPadding"
+        verticalScrolling="false"
+      
     >
         <content>
         <HBox justifyContent="Center" >
-            <Text  text=" ¿ Desea añadir conexión API ?" textAlign="Center" class="MessageAPI" />               
+            <Text  text=" ¿ Desea añadir conexión API ?" textAlign="Center"  />               
         </HBox>
         </content>
         <beginButton>
@@ -26,7 +27,7 @@
         <endButton>
             <Button
                 text="Sólo crear sistema"
-                press=""
+                press="onCloseDialogConfirmSistema"
             />
         </endButton>
     </Dialog>

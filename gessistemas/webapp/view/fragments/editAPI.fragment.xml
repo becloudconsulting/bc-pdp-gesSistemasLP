@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout">
-    <Dialog title="Nueva conexión" type='Message' contentWidth="600px" class="sapUiNoContentPadding">
+    <Dialog title="Nueva conexión" id="idFragmentEdit" type='Message' contentWidth="600px" class="sapUiNoContentPadding">
         <content>
             <l:Grid vSpacing="1" hSpacing="1" width="100%" class="sapUiSmallMargin">
                 <VBox>
@@ -12,11 +12,11 @@
                 </VBox>
                 <VBox>
                     <Label text="Nombre conexión" />
-                    <Input id="name_conexionEdit" width="100%" liveChange="liveChange" />
+                    <Input  value ="{oModelUsersData>API_name}" id="name_conexionEdit" width="100%" />
                       <Label text="Descripción" />
-                    <TextArea id="name_descripEdit" rows="4" width="100%" liveChange="liveChange"/>
+                    <TextArea value="{oModelUsersData>Descripcion}" id="name_descripEdit" rows="4" width="100%" liveChange="liveChange"/>
                     <Label text="Método" />
-                    <Select id="name_metodoEdit" forceSelection="true" width="100%">
+                    <Select id="name_metodoEdit" forceSelection="true" width="100%" selectedKey="{oModelUsersData>Metodo}">
                         <core:Item key="" text=""/>
                         <core:Item key="GET" text="GET"/>
                         <core:Item key="POST" text="POST"/>
@@ -24,17 +24,17 @@
                         <core:Item key="DELETE" text="DELETE"/>
                     </Select>
                     <Label text="Path/Endpoint" />
-                    <Input id="name_pathEdit" width="100%" liveChange="liveChange"/>
+                    <Input id="name_pathEdit" width="100%" liveChange="liveChange" value="{oModelUsersData>Path}" />
                     <Label text="Tipo de Conexión" />
-                    <Select id="name_tipoEdit" forceSelection="true" width="100%">
-                        <core:Item key="" text=""/>
+                    <Select id="name_tipoEdit" forceSelection="true" width="100%" selectedKey="{oModelUsersData>Tipo_conexion}">
+                        <core:Item key="API" text="API"/>
                         <core:Item key="API" text="API"/>
                         <core:Item key="ODATA" text="ODATA"/>
                     </Select>
                     <Label text="Host" />
-                    <Input id="name_hostEdit" width="100%" liveChange="liveChange"/>
+                    <Input id="name_hostEdit" width="100%" liveChange="liveChange" value="{oModelUsersData>Host}" />
                     <Label text="Estado" />
-                    <Select id="name_estadoEdit" forceSelection="true" width="100%" >
+                    <Select id="name_estadoEdit" forceSelection="true" width="100%" selectedKey="{oModelUsersData>status}" >
                         <core:Item key="" text=""/>
                         <core:Item key="Activo" text="Activo"/>
                         <core:Item key="Inactivo" text="Inactivo"/>
@@ -42,7 +42,7 @@
                                  
                     <HBox class ='políticasLabel'>
                         <Button text="Probar conexión" press="" class='myTextWithMarginRight'/>
-                        <Button text="Editar parámetros de entrada" press="onCreateParam" />
+                        <Button text="Editar parámetros de entrada y salida" press="onCreateParam" />
                     </HBox>
 
                     <layoutData>
@@ -55,7 +55,7 @@
             <Button text="Guardar" type="Emphasized" press="onSaveCreate"/>
         </beginButton>
         <endButton>
-            <Button text="Cancelar" press="onCloseCreate"/>
+            <Button text="Cancelar" press="onCloseEditConexion"/>
         </endButton>
     </Dialog>
 </core:FragmentDefinition>

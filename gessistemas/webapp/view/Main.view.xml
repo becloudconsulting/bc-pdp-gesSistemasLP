@@ -5,75 +5,116 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:fb="sap.ui.comp.filterbar"
-
+    xmlns:f="sap.f"
 >
-    <Page
-        id="page"
+    <!-- Dynamic Page -->
+    <f:DynamicPage
+        id="dynamicPage"
         title="Sistemas"
-        titleAlignment="Center"
+        headerExpanded="{/headerExpanded}"
     >
-        <content>
-            <fb:FilterBar
-                class="sapUiSizeCompact"
-                reset="onResetFilters"
-                showRestoreOnFB="true"
-                showGoOnFB="false"
-                showFilterConfiguration="false"
-                useToolbar="false"
-            >
-                <fb:filterItems>
-                    <fb:FilterItem
-                        name="A"
-                        label="Sistema"
-                    >
-                        <fb:control>
-                            <Input
-                                id="ipSistemaSearch"
-                                width="100%"
-                                liveChange="changeFilter"
-                            />
-                        </fb:control>
-                    </fb:FilterItem>
-                    <fb:FilterItem
-                        name="B"
-                        label="Estado"
-                    >
-                        <fb:control>
-                            <Select
-                                id="slEstadoSearch"
-                                selectedKey="0"
-                                change="changeFilter"
-                            >
-                                <core:Item
-                                    key="0"
-                                    text="Todos"
-                                />
-                                <core:Item
-                                    key="1"
-                                    text="Activo"
-                                />
-                                <core:Item
-                                    key="2"
-                                    text="Inactivo"
-                                />
-                            </Select>
-                        </fb:control>
-                    </fb:FilterItem>
-                    <fb:FilterItem
-                        name="C"
-                        label="Rango de Fechas"
-                    >
-                        <fb:control>
-                            <DateRangeSelection
-                                id="slFechaSearch"
-                                displayFormat="yyyy/MM/dd"
-                                change="onDateRangeChange"
-                            />
-                        </fb:control>
-                    </fb:FilterItem>
-                </fb:filterItems>
-            </fb:FilterBar>
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Sistemas" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
 
+        <!-- Dynamic Page Header -->
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <!-- Filter Bar Section -->
+                    <fb:FilterBar
+                        class="sapUiSizeCompact"
+                        reset="onResetFilters"
+                        showRestoreOnFB="true"
+                        showGoOnFB="true"
+                        showFilterConfiguration="false"
+                        useToolbar="false"
+                    >
+                        <fb:filterItems>
+                            <fb:FilterItem
+                                name="A"
+                                label="Sistema"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="ipSistemaSearch"
+                                        width="100%"
+                                        liveChange="changeFilter"
+                                        placeholder="Ingrese nombre del sistema"
+                                    />
+                                </fb:control>
+                            </fb:FilterItem>
+                            <fb:FilterItem
+                                name="B"
+                                label="Estado"
+                            >
+                                <fb:control>
+                                    <Select
+                                        id="slEstadoSearch"
+                                        selectedKey="0"
+                                        change="changeFilter"
+                                    >
+                                        <core:Item
+                                            key="0"
+                                            text="Todos"
+                                        />
+                                        <core:Item
+                                            key="1"
+                                            text="Activo"
+                                        />
+                                        <core:Item
+                                            key="2"
+                                            text="Inactivo"
+                                        />
+                                    </Select>
+                                </fb:control>
+                            </fb:FilterItem>
+                            <fb:FilterItem
+                                name="C"
+                                label="Fecha de Creación"
+                            >
+                                <fb:control>
+                                    <DateRangeSelection
+                                        id="slFechaSearch"
+                                        displayFormat="dd/MM/yyyy"
+                                        change="onDateRangeChange"
+                                    
+                                  
+                            
+                                        placeholder="Filtra por rango de fecha"
+                                    />
+                                </fb:control>
+                            </fb:FilterItem>
+                            
+
+                              <fb:FilterItem
+                                name="M"
+                                label="Fecha de Modificación"
+                            >
+                                <fb:control>
+                                    <DateRangeSelection
+                                        id="ipFecha_modif"
+                                        displayFormat="dd/MM/yyyy"
+                                        change="onDateRangeChange"
+                                  
+                            
+                                        placeholder="Filtra por rango de fecha"
+                                    />
+                                </fb:control>
+                            </fb:FilterItem>
+                        </fb:filterItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <!-- Dynamic Page Content -->
+        <f:content>
+            <!-- Users Table Section -->
             <VBox class="sapUiSmallMargin">
                 <Table
                     id="idProductsTable"
@@ -110,7 +151,7 @@
                                     class="sapUiSizeCompact"
                                     tooltip="Actualizar datos"
                                     iconFirst="false"
-                                    text="Actualizar datos"
+                                    
                                     icon="sap-icon://synchronize"
                                     type="Emphasized"
                                     press="onRefresh"
@@ -135,7 +176,13 @@
                             minScreenWidth="Tablet"
                             demandPopin="true"
                         >
-                            <Text text="Fecha Creación" />
+                            <Text text="Fecha de Creación" />
+                        </Column>
+                         <Column
+                            minScreenWidth="Tablet"
+                            demandPopin="true"
+                        >
+                            <Text text="Fecha de Modificación" />
                         </Column>
                         <Column
                             minScreenWidth="Tablet"
@@ -157,6 +204,8 @@
                             type="Detail"
                             detailPress="onEdit"
                             vAlign="Middle"
+                            
+                        
                         >
                             <cells>
                                 <ObjectIdentifier
@@ -167,6 +216,9 @@
                                 />
                                 <ObjectIdentifier
                                     text="{path: 'oModelCompanySystem>creationDate', formatter:'.formatDate'}"
+                                />
+                                <ObjectIdentifier
+                                    text="{path: 'oModelCompanySystem>Fecha_modificacion', formatter:'.formatDate'}"
                                 />
                                 <ObjectStatus
                                     text="{path: 'oModelCompanySystem>status', formatter: '.formatterEstado'}"
@@ -198,8 +250,6 @@
                     </items>
                 </Table>
             </VBox>
-
-
-        </content>
-    </Page>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>

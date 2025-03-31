@@ -1,0 +1,115 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:fo="sap.ui.layout.form"
+    xmlns:k="sap.m"
+    xmlns:dnd="sap.ui.core.dnd"
+    xmlns:u="sap.ui.unified"
+    controllerName="com.becloud.pdp.gessistemas.controller.fragments_controller.paramEntr"
+>
+    <Dialog
+        title="Parámetros de entrada y salida"
+        type='Message'
+        contentWidth="1200px"
+        horizontalScrolling="false"
+        class="sapUiNoContentPadding"
+    >
+        <content>
+            <VBox>
+                <Panel width="100%" height="auto">
+                    <table:TreeTable
+                        id="treeTableInputs"
+                        rows="{path: 'oModelCatalog>/catalog/inputs'}"
+                        selectionBehavior="RowOnly"
+                        enableSelectAll="false"
+                        ariaLabelledBy="titleInputs"
+                    >
+                        <table:extension>
+                            <k:OverflowToolbar style="Clear">
+                                <k:Title id="titleInputs" text="Inputs de entrada" textAlign="Begin"/>
+                            </k:OverflowToolbar>
+                        </table:extension>
+
+                        <table:columns>
+                            <table:Column width="13rem">
+                                <k:Label text="Nombre"/>
+                                <table:template>
+                                    <Input value="{oModelCatalog>name}" editable="false"/>
+                                </table:template>
+                            </table:Column>
+
+                            <table:Column width="9rem">
+                                <k:Label text="Tipo"/>
+                                <table:template>
+                                    <k:Select
+                                        items="{path: 'oModelCatalog>/types', templateShareable: true}"
+                                        selectedKey="{oModelCatalog>type}"
+                                        enabled="false"
+                                    >
+                                        <core:Item key="{oModelCatalog>key}" text="{oModelCatalog>value}"/>
+                                    </k:Select>
+                                </table:template>
+                            </table:Column>
+
+                            <table:Column>
+                                <k:Label text="Descripción"/>
+                                <table:template>
+                                    <Input value="{oModelCatalog>description}" width="100%" editable="false"/>
+                                </table:template>
+                            </table:Column>
+                        </table:columns>
+                    </table:TreeTable>
+
+                    <table:TreeTable
+                        id="treeTableOutputs"
+                        rows="{path: 'oModelCatalogOutput>/catalog/outputs'}"
+                        selectionBehavior="RowOnly"
+                        enableSelectAll="false"
+                        ariaLabelledBy="titleOutputs"
+                    >
+                        <table:extension>
+                            <k:OverflowToolbar style="Clear">
+                                <k:Title id="titleOutputs" text="Inputs de salida" textAlign="Begin"/>
+                            </k:OverflowToolbar>
+                        </table:extension>
+
+                        <table:columns>
+                            <table:Column width="13rem">
+                                <k:Label text="Nombre"/>
+                                <table:template>
+                                    <Input value="{oModelCatalogOutput>name}" editable="false"/>
+                                </table:template>
+                            </table:Column>
+
+                            <table:Column width="9rem">
+                                <k:Label text="Tipo"/>
+                                <table:template>
+                                    <k:Select
+                                        items="{path: 'oModelCatalogOutput>/types', templateShareable: true}"
+                                        selectedKey="{oModelCatalogOutput>type}"
+                                        enabled="false"
+                                    >
+                                        <core:Item key="{oModelCatalogOutput>key}" text="{oModelCatalogOutput>value}"/>
+                                    </k:Select>
+                                </table:template>
+                            </table:Column>
+
+                            <table:Column>
+                                <k:Label text="Descripción"/>
+                                <table:template>
+                                    <Input value="{oModelCatalogOutput>description}" width="100%" editable="false"/>
+                                </table:template>
+                            </table:Column>
+                        </table:columns>
+                    </table:TreeTable>
+                </Panel>
+            </VBox>
+        </content>
+
+        <beginButton>
+            <Button text="Cerrar" press="onCloseReadParam"/>
+        </beginButton>
+    </Dialog>
+</core:FragmentDefinition>

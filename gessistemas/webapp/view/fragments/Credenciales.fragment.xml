@@ -6,14 +6,15 @@
             <l:Grid vSpacing="1" hSpacing="1" width="100%" class="sapUiSmallMargin">
 
                 <VBox>
+<!--Está asociado con el modelo oModelCredencialesFF del controller, por alguna razón no trae esos datos, por eso están en duro-->
                     <Label text="Tipo de autenticación" />
-                    <Input enabled="false" id="ipTipoAuth" width="100%" liveChange="liveChange" value="{oModelCredencialesFF>Tipo_autent}"/>
+                    <Input enabled="false" id="ipTipoAuth" width="100%" liveChange="liveChange" value="Autenticación Básica"/>
                     <Label  text="URI" />
-                    <Input enabled="false" id="ipURI" width="100%" liveChange="liveChange"/>
+                    <Input enabled="false" id="ipURI1" width="100%" liveChange="liveChange"  value="https://api.ejemplo.com/authentication/a"/>
                     <Label text="Usuario" />
-                    <Input enabled="false" id="ipUsuario" width="100%" liveChange="liveChange"/>
+                    <Input enabled="false" id="ipUsuario1" width="100%" liveChange="liveChange"  value="Admin"/>
                     <Label text="Contraseña" />
-                    <Input enabled="false" id="ipPSW" width="100%" liveChange="liveChange"/>
+                    <Input enabled="false" id="ipPSW1" width="100%" liveChange="liveChange" value="*******"/>
                     <layoutData>
                         <l:GridData span="XL12 L12 M12 S12"/>
                     </layoutData>
@@ -21,10 +22,11 @@
             </l:Grid >
         </content>
         <beginButton>
-            <Button text="Guardar" type="Emphasized" press="onSaveCreate"/>
+            <Button text="Guardar" type="Emphasized" press="onSaveCreate" visible="false"/>
         </beginButton>
         <endButton>
-            <Button text="Cancelar" press="onCloseCreate"/>
+            <Button text="Cerrar" press="CerrarCredenciales"/>
         </endButton>
     </Dialog>
 </core:FragmentDefinition>
+

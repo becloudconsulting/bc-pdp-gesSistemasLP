@@ -269,23 +269,26 @@ sap.ui.define([
             },
 
             onCredenciales: function () {
-                this.oViewCreate = sap.ui.xmlfragment("com.becloud.pdp.gessistemas.view.fragments.Credenciales", this);
-                this.getView().addDependent(this.oViewCreate);
+                this.oViewCreateCredenciales = sap.ui.xmlfragment("com.becloud.pdp.gessistemas.view.fragments.Credenciales", this);
+                this.getView().addDependent(this.oViewCreateCredenciales);
 
-                this.oViewCreate.attachAfterClose(function () {
-                    this.oViewCreate.destroy();
+                this.oViewCreateCredenciales.attachAfterClose(function () {
+                    this.oViewCreateCredenciales.destroy();
                 }.bind(this));
 
                 this.getCredenciales().then(function (responseCredenciales) {
                     if (responseCredenciales.state) {
-                        this.oViewCreate.open();
+                        this.oViewCreateCredenciales.open();
                     } else {
-                        this.oViewCreate.destroy();
+                        this.oViewCreateCredenciales.destroy();
                         //MESSAGE
                     }
                 }.bind(this));
             },
 
+            CerrarCredenciales: function(){
+                this.oViewCreateCredenciales.close();
+            },
 
             getCredenciales: function(){
 
@@ -456,6 +459,8 @@ sap.ui.define([
                 this.oViewInfoCompanySystem.close();
             },
 
+            
+
             formatPhoto: function (photo) {
                 if (photo) {
                     return "data:image/png;base64," + photo.substring(104)
@@ -490,8 +495,11 @@ sap.ui.define([
                 console.log(oDateRange)
                 var startDate = oDateRange.getDateValue();
                 var endDate = oDateRange.getSecondDateValue();
-                debugger
+               
             
+                var oDateModifRange = this.getView().byId("ipFecha_modif");
+                var startDate = oDateModifRange.getDateValue();
+                var endDate = oDateModifRange.getSecondDateValue();
                 var oTable = this.getView().byId("idProductsTable");
                 var filtros = [];
             
@@ -536,7 +544,7 @@ sap.ui.define([
                     });
                     filtros.push(filtroEnd); */
                 }
-            
+                
                 oTable.getBinding("items").filter(filtros, sap.ui.model.FilterType.Application);
             },
 
@@ -684,20 +692,22 @@ sap.ui.define([
                             rsp: [
                                 {
                                     "id": "1",
-                                    "companySystemName": "Tech Solutions Inc.",
+                                    "companySystemName": "Tech Solutions Usuarios.",
                                     "Descripcion": "Descripcion abcd",
                                     "Servicios": "3",
-                                    "creationDate": "Fri Jan 17 2025 00:00:00 GMT-0400",
+                                    "creationDate": "Fri Jan 18 2025 00:00:00 GMT-0400",
+                                    "Fecha_modificacion": "Fri Jan 17 2025 00:00:00 GMT-0400",
                                     "Creador": "Admin05",
                                     "status": "1",
     
                                 },
                                 {
                                     "id": "2",
-                                    "companySystemName": "Global Finance Corp.",
+                                    "companySystemName": "Finanzas Corporativas",
                                     "method": "POST",
                                     "endPoint": "/api/v1/transactions",
                                     "creationDate": "Fri Jan 16 2025 00:00:00 GMT-0400",
+                                    "Fecha_modificacion": "Fri Jan 17 2025 00:00:00 GMT-0400",
                                     "connectionType": "API",
                                     "status": "1",
                                     "description": "Registro de nuevas transacciones financieras.",
@@ -705,10 +715,11 @@ sap.ui.define([
                                 },
                                 {
                                     "id": "3",
-                                    "companySystemName": "HealthCare Systems Ltd.",
+                                    "companySystemName": "Almacenamiento de contratos",
                                     "method": "PUT",
                                     "endPoint": "/api/v1/patients/12345",
                                     "creationDate": "Thu Jan 15 2025 00:00:00 GMT-0400",
+                                    "Fecha_modificacion": "Fri Jan 17 2025 00:00:00 GMT-0400",
                                     "connectionType": "API",
                                     "status": "2",
                                     "description": "Actualización de datos del paciente.",
@@ -716,10 +727,11 @@ sap.ui.define([
                                 },
                                 {
                                     "id": "4",
-                                    "companySystemName": "Retail Innovations LLC",
+                                    "companySystemName": "Datalake contraseñas cifradas",
                                     "method": "DELETE",
                                     "endPoint": "/api/v1/products/98765",
                                     "creationDate": "Wed Jan 14 2025 00:00:00 GMT-0400",
+                                    "Fecha_modificacion": "Fri Jan 17 2025 00:00:00 GMT-0400",
                                     "connectionType": "API",
                                     "status": "1",
                                     "description": "Eliminación de un producto del inventario.",
@@ -730,7 +742,8 @@ sap.ui.define([
                                     "companySystemName": "EduTech Solutions",
                                     "method": "GET",
                                     "endPoint": "/api/v1/courses",
-                                    "creationDate": null, // Simulando un caso sin fecha
+                                    "creationDate": "Fri Jan 10 2025 00:00:00 GMT-0400", 
+                                    "Fecha_modificacion": "Fri Jan 17 2025 00:00:00 GMT-0400",
                                     "connectionType": "API",
                                     "status": "1",
                                     "description": "Obtención de la lista de cursos disponibles.",
@@ -1066,7 +1079,7 @@ sap.ui.define([
                     sValue = new Date(sValue);
                 }
                 var oDateFormat = sap.ui.core.format.DateFormat.getInstance({
-                    pattern: "yyyy-MM-dd",
+                    pattern: "dd/MM/yyyy",
                     strictParsing: true,
                     UTC: false
                 });
@@ -1075,7 +1088,7 @@ sap.ui.define([
             },
             formatterDate: function (sValue) {
                 var oDateFormat = sap.ui.core.format.DateFormat.getInstance({
-                    pattern: "yyyy-MM-dd",
+                    pattern: "dd/MM/yyyy",
                     UTC: false
                 });
                 sValue = oDateFormat.format(sValue);

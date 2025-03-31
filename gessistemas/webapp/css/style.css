@@ -33,3 +33,13 @@
     font-weight: bold;
     font-size: 16px;
 }
+
+.MarginLeftAgregarNivelPrincipal {
+    margin-left: 5px;
+ 
+}
+
+.customMessageBox  {
+    text-align: center !important;
+    width: 100%;
+}

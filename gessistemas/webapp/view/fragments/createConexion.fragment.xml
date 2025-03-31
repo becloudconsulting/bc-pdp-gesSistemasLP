@@ -55,7 +55,7 @@
             <Button text="Guardar" type="Emphasized" press="onSaveCreate"/>
         </beginButton>
         <endButton>
-            <Button text="Cancelar" press="onCloseCreate"/>
+            <Button text="Cancelar" press="onCloseCreateConexion"/>
         </endButton>
     </Dialog>
 </core:FragmentDefinition>
