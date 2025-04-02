@@ -18,6 +18,7 @@
                         id="CreateProductWizard"
                         class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
                         complete="wizardCompletedHandler"
+                        showNextButton="false"
                     >
                         <WizardStep
                             id="ProductTypeStep"

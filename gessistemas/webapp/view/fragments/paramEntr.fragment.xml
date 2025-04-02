@@ -197,7 +197,7 @@
             <Button
                 text="Guardar"
                 type="Emphasized"
-                press="onSaveCreate"
+                press="onGuardarParametro"
             />
         </beginButton>
         <endButton>

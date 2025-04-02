@@ -52,7 +52,7 @@
             </l:Grid >
         </content>
         <beginButton>
-            <Button text="Guardar" type="Emphasized" press="onSaveCreate"/>
+            <Button text="Guardar" type="Emphasized" press="onGuardarIngresarConexion"/>
         </beginButton>
         <endButton>
             <Button text="Cancelar" press="onCloseCreateConexion"/>

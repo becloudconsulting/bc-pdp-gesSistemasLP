@@ -1061,59 +1061,90 @@ sap.ui.define([
 
 
 
-            /*createCatalogModel: function () {
-                // Modelo para los Inputs de Entrada (ya existente)
-                const oModelInputs = new JSONModel({
-                    "inputs": [
-                        {
-                            "name": "input_cliente",
-                            "type": "JSON",
-                            "description": "Input para datos del cliente",
-                            "subInputs": [
-                                {
-                                    "name": "nombre",
-                                    "type": "String",
-                                    "description": "Nombre del cliente"
-                                }
-                                // Otros subinputs
-                            ]
-                        }
-                        // Otros inputs de entrada...
+            onGuardarIngresarConexion: function () {
+                var that = this; // Referencia al controlador
+            
+                sap.m.MessageBox.warning("¿Desea guardar la conexión creada?", {
+                    title: "Confirmación",
+                    actions: [
+                        "Si, guardar",
+                        "Continuar editando"
                     ],
-                    "types": [
-                        { "key": "String", "value": "String" },
-                        { "key": "JSON", "value": "JSON" },
-                        { "key": "Date", "value": "Date" },
-                        { "key": "Integer", "value": "Integer" }
-                    ]
+                    emphasizedAction: "Si, guardar",
+                    styleClass: "customMessageBox", 
+                    contentWidth: "25rem",
+                    onClose: function (sAction) {
+                        if (sAction === "Si, guardar") {
+                            that.onCloseCreateConexion(); // Cierra el fragment
+                            sap.m.MessageToast.show("Guardado con éxito", {
+                                duration: 1000, // Tiempo en milisegundos (2 segundos)
+                                width: "15rem", // Opcional: define el ancho del mensaje
+                                my: "center bottom", // Posición en la pantalla
+                                at: "center bottom",
+                                offset: "0 -50"
+                                
+                            });
+                        } 
+                    }
                 });
+            }
+            ,
+            onGuardarEditarConexion: function () {
+                var that = this; // Referencia al controlador
             
-                // Modelo para los Outputs (parámetros de salida)
-                const oModelOutputs = new JSONModel({
-                    "outputs": [
-                        {
-                            "name": "output_cliente",
-                            "type": "JSON",
-                            "description": "Output para datos del cliente",
-                            "subInputs": [
-                                {
-                                    "name": "nombre_salida",
-                                    "type": "String",
-                                    "description": "Nombre del cliente (salida)"
-                                }
-                                // Otros subinputs
-                            ]
-                        }
-                        // Otros outputs...
-                    ]
+                sap.m.MessageBox.warning("¿Desea guardar los cambios realizados?", {
+                    title: "Confirmación",
+                    actions: [
+                        "Si, guardar",
+                        "Continuar editando"
+                    ],
+                    emphasizedAction: "Si, guardar",
+                    styleClass: "customMessageBox", 
+                    contentWidth: "25rem",
+                    onClose: function (sAction) {
+                        if (sAction === "Si, guardar") {
+                            that. onCloseEditConexion(); // Cierra el fragment
+                            sap.m.MessageToast.show("Cambios guardados con éxito", {
+                                duration: 1000, // Tiempo en milisegundos (2 segundos)
+                                width: "15rem", // Opcional: define el ancho del mensaje
+                                my: "center bottom", // Posición en la pantalla
+                                at: "center bottom",
+                                offset: "0 -50"
+                                
+                            });
+                        } 
+                    }
                 });
+            },
             
-                // Establecer ambos modelos en la vista
-                this.getView().setModel(oModelInputs, "oModelInputs");  // Modelo de Inputs de Entrada
-                this.getView().setModel(oModelOutputs, "oModelOutputs");  // Modelo de Outputs de Salida
-            } */
+           
+            onGuardarParametro: function () {
+                var that = this; // Referencia al controlador
             
-            
+                sap.m.MessageBox.warning("¿Desea guardar los parámetros ingresados?", {
+                    title: "Confirmación",
+                    actions: [
+                        "Si, guardar",
+                        "Continuar editando"
+                    ],
+                    emphasizedAction: "Si, guardar",
+                    styleClass: "customMessageBox", 
+                    contentWidth: "25rem",
+                    onClose: function (sAction) {
+                        if (sAction === "Si, guardar") {
+                            that. onCloseParam()(); // Cierra el fragment
+                            sap.m.MessageToast.show("Cambios guardados con éxito", {
+                                duration: 1000, // Tiempo en milisegundos (2 segundos)
+                                width: "15rem", // Opcional: define el ancho del mensaje
+                                my: "center bottom", // Posición en la pantalla
+                                at: "center bottom",
+                                offset: "0 -50"
+                                
+                            });
+                        } 
+                    }
+                });
+            },
             
             
 

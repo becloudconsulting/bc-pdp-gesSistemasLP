@@ -1139,7 +1139,35 @@ sap.ui.define([
                 // Navegar a la vista de usuario
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("RouteUserData");
-            }
+            },
+
+            onGuardarEditSistema: function () {
+                var that = this; // Referencia al controlador
+            
+                sap.m.MessageBox.warning("¿Desea guardar cambios realizados?", {
+                    title: "Confirmación",
+                    actions: [
+                        "Si, guardar",
+                        "Continuar editando"
+                    ],
+                    emphasizedAction: "Si, guardar",
+                    styleClass: "customMessageBox", 
+                    contentWidth: "25rem",
+                    onClose: function (sAction) {
+                        if (sAction === "Si, guardar") {
+                            that. onCloseEdit(); // Cierra el fragment
+                            sap.m.MessageToast.show("Cambios guardados con éxito", {
+                                duration: 1000, // Tiempo en milisegundos (2 segundos)
+                                width: "15rem", // Opcional: define el ancho del mensaje
+                                my: "center bottom", // Posición en la pantalla
+                                at: "center bottom",
+                                offset: "0 -50"
+                                
+                            });
+                        } 
+                    }
+                });
+            },
 
 
 

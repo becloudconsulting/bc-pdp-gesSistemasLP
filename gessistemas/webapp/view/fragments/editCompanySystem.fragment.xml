@@ -32,7 +32,7 @@
             </l:Grid>
         </content>
         <beginButton>
-            <Button text="Guardar" press=".onSaveEdit" type="Emphasized"/>
+            <Button text="Guardar" press="onGuardarEditSistema" type="Emphasized"/>
         </beginButton>
         <endButton>
             <Button text="Cancelar" press=".onCloseEdit"/>
