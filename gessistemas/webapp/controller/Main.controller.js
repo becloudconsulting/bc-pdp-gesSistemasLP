@@ -76,10 +76,14 @@ sap.ui.define([
             }, */
             //USADO
             onInit: function () {
-                var OmodelTableUser = new sap.ui.model.json.JSONModel({
+
+                sap.ui.getCore().loadLibrary("sap.ui.table"); // Carga explícita de la librería
+                
+                /*var OmodelTableUser = new sap.ui.model.json.JSONModel({
                     isSecondTableVisible: false
                 });
-                this.getView().setModel(OmodelTableUser);
+                this.getView().setModel(OmodelTableUser);*/
+
 
                 //AGREGUÉ EL MODELO PARA LAS CREDENCIALES
                 //Datos Estaticos
@@ -112,26 +116,8 @@ sap.ui.define([
                     this.onBusyDialog("Close");
                 }.bind(this))
 
-                //Datos Dinamicos
-                /* this.onBusyDialog("Open");
-                this.getOwnerComponent().getModel().metadataLoaded().then(function () {
-                    var oModelCompanySystem = new JSONModel([]);
-                    this.getView().setModel(oModelCompanySystem, "oModelCompanySystem");
-
-                    this.getProducts().then(function (responseCompanySystem) {
-                        if (responseCompanySystem.state) {
-                            this.onBusyDialog("Close");
-
-                            oModelCompanySystem.setData(responseCompanySystem.rsp)
-                            oModelCompanySystem.refresh();
-                        } else {
-                            this.onBusyDialog("Close");
-                            MessageBox.error(responseCompanySystem.msg, {
-                                title: "Obtención Productos"
-                            });
-                        }
-                    }.bind(this));
-                }.bind(this));     */
+               
+              
             },
             
             onResetFilters: function () {
