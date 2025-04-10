@@ -35,19 +35,47 @@
                                 editable="true"
                                 layout="ResponsiveGridLayout"
                             >
-                                <Label text="Nombre del Sistema*" />
+                                <Label text="Nombre del Sistema" />
                                 <Input
                                     id="ipNameCreate"
-                                    width="100%"
+                                    width="400px"
                                     liveChange="liveChange"
                                 />
                                 <Label text="Descripción" />
                                 <TextArea
                                     id="ipDescriptionCreate"
                                     rows="2"
-                                    width="100%"
+                                    width="400px"
                                     liveChange="liveChange"
                                 />
+                
+                                <Label text="RAT" labelFor="comboSistema"/>
+                                <ComboBox 
+                                    id="comboSistema" 
+                                    selectedKey=""
+                                    width="400px"
+                                    selectionChange=".onSystemChange">
+                                    <items>
+                                        <core:Item key="Interno" text="Interno"/>
+                                        <core:Item key="Externo" text="Externo"/>
+                                    </items>
+                                </ComboBox>
+
+                                 <Label text="Adjunto de Encargado" labelFor="comboSistema"/>
+                                <u:FileUploader
+                                    id="fileUploader"
+                                    name="myFileUpload"
+                                    width="400px"
+                                    uploadUrl="upload/"
+                                    tooltip="Sube tu archivo al servidor"
+                                    uploadComplete=".UploadCompleto"
+                                    visible="false"
+                                    style="Emphasized"
+                                    buttonText="Subir archivo"
+                                    fileType="pdf,jpg,png"
+                                    maximumFileSize="10"
+                                    sendXHR="true"/>
+
                             </form:SimpleForm>
                                 <HBox justifyContent="End"  >
                                <Button visible="false" class="sapUiSizeCompact" tooltip="Continuar"  text="Continuar"  type="Emphasized" press="onNextStep"/>

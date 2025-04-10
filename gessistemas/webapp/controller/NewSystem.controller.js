@@ -159,7 +159,16 @@ sap.ui.define([
                     }
                 }
             });
-        }
+        },
+
+        onSystemChange: function(oEvent) {
+            var sSelectedKey = oEvent.getParameter("selectedItem").getKey();
+            var oFileUploader = this.byId("fileUploader");
+            
+            oFileUploader.setVisible(sSelectedKey === "Externo");
+        },
+
+
         
         
 

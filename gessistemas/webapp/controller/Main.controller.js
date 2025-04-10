@@ -367,6 +367,7 @@ sap.ui.define([
                 });
             
                 this.oViewEditCompanySystem.open();
+                
             },
             
             onSaveEdit: function () {
@@ -1156,12 +1157,6 @@ sap.ui.define([
             },
 
 
-
-
-            
-
-            
-    
         
             
         });
